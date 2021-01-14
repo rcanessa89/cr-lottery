@@ -1,0 +1,62 @@
+service: cr-lottery
+
+useDotenv: true
+
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+
+custom:
+  sstApp: ${self:provider.stage}-cr-lottery-infrastructure
+  dbSecret: !ImportValue '${self:custom.sstApp}-dbSecret'
+  bundle:
+    tsConfig: ./lambda-tsconfig/tsconfig.json
+    linting: false # Lint will be handle it by Nx
+    externals:
+      - '@nestjs/microservices'
+      - 'apollo-server-fastify'
+      - 'cache-manager'
+      - 'class-transformer'
+      - 'class-validator'
+      - '@nestjs/microservices/microservices-module'
+      - '@nestjs/websockets/socket-module'
+      - 'class-transformer/storage'
+      - 'fastify-swagger'
+    # These dependencies most be include it in case to use MySql and/or GraphQL
+    forceInclude:
+      - mysql
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    SERVICE: ${self:service}
+    DB_SECRET: '${self:custom.dbSecret}'
+  vpc:
+    securityGroupIds:
+      - !ImportValue '${self:custom.sstApp}-securityGroupId'
+    subnetIds:
+      - !ImportValue '${self:custom.sstApp}-subnetId'
+  apiGateway:
+    shouldStartNameWithService: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ec2:CreateNetworkInterface
+      Resource: '*'
+
+functions:
+  chances:
+    handler: ./apps/chances/src/lambda.handler
+    events:
+      - http:
+          path: /graphql
+          method: post
+          cors: true
