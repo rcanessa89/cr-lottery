@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/be-todos-lib',
     '<rootDir>/apps/chances',
     '<rootDir>/libs/chances-lib',
+    '<rootDir>/libs/loteria-lib',
   ],
 };

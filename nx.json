@@ -37,6 +37,9 @@
     },
     "chances-lib": {
       "tags": []
+    },
+    "loteria-lib": {
+      "tags": []
     }
   }
 }
