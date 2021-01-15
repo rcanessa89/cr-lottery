@@ -327,6 +327,174 @@
           }
         }
       }
+    },
+    "monazos-lib": {
+      "root": "libs/monazos-lib",
+      "sourceRoot": "libs/monazos-lib/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/monazos-lib/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/monazos-lib"
+          ],
+          "options": {
+            "jestConfig": "libs/monazos-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "monazos": {
+      "root": "apps/monazos",
+      "sourceRoot": "apps/monazos/src",
+      "projectType": "application",
+      "prefix": "monazos",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/monazos",
+            "main": "apps/monazos/src/main.ts",
+            "tsConfig": "apps/monazos/tsconfig.app.json",
+            "assets": [
+              "apps/monazos/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/monazos/src/environments/environment.ts",
+                  "with": "apps/monazos/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "monazos:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/monazos/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/monazos"
+          ],
+          "options": {
+            "jestConfig": "apps/monazos/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tiempos-lib": {
+      "root": "libs/tiempos-lib",
+      "sourceRoot": "libs/tiempos-lib/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tiempos-lib/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/tiempos-lib"
+          ],
+          "options": {
+            "jestConfig": "libs/tiempos-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tiempos": {
+      "root": "apps/tiempos",
+      "sourceRoot": "apps/tiempos/src",
+      "projectType": "application",
+      "prefix": "tiempos",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/tiempos",
+            "main": "apps/tiempos/src/main.ts",
+            "tsConfig": "apps/tiempos/tsconfig.app.json",
+            "assets": [
+              "apps/tiempos/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/tiempos/src/environments/environment.ts",
+                  "with": "apps/tiempos/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "tiempos:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/tiempos/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/tiempos"
+          ],
+          "options": {
+            "jestConfig": "apps/tiempos/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

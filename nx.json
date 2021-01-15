@@ -49,6 +49,18 @@
     },
     "lotto": {
       "tags": []
+    },
+    "monazos-lib": {
+      "tags": []
+    },
+    "monazos": {
+      "tags": []
+    },
+    "tiempos-lib": {
+      "tags": []
+    },
+    "tiempos": {
+      "tags": []
     }
   }
 }

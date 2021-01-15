@@ -74,3 +74,17 @@ functions:
           path: /lotto/graphql
           method: post
           cors: true
+  monazos:
+    handler: ./apps/monazos/src/lambda.handler
+    events:
+      - http:
+          path: /monazos/graphql
+          method: post
+          cors: true
+  tiempos:
+    handler: ./apps/tiempos/src/lambda.handler
+    events:
+      - http:
+          path: /tiempos/graphql
+          method: post
+          cors: true
