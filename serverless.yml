@@ -57,6 +57,20 @@ functions:
     handler: ./apps/chances/src/lambda.handler
     events:
       - http:
-          path: /graphql
+          path: /chances/graphql
+          method: post
+          cors: true
+  loteria:
+    handler: ./apps/loteria/src/lambda.handler
+    events:
+      - http:
+          path: /loteria/graphql
+          method: post
+          cors: true
+  lotto:
+    handler: ./apps/lotto/src/lambda.handler
+    events:
+      - http:
+          path: /lotto/graphql
           method: post
           cors: true

@@ -9,5 +9,8 @@ module.exports = {
     '<rootDir>/apps/chances',
     '<rootDir>/libs/chances-lib',
     '<rootDir>/libs/loteria-lib',
+    '<rootDir>/apps/loteria',
+    '<rootDir>/libs/lotto-lib',
+    '<rootDir>/apps/lotto',
   ],
 };

@@ -19,7 +19,8 @@
       "@cr-lottery/types": ["libs/types/src/index.ts"],
       "@cr-lottery/be-api-base": ["libs/be-api-base/src/index.ts"],
       "@cr-lottery/chances-lib": ["libs/chances-lib/src/index.ts"],
-      "@cr-lottery/loteria-lib": ["libs/loteria-lib/src/index.ts"]
+      "@cr-lottery/loteria-lib": ["libs/loteria-lib/src/index.ts"],
+      "@cr-lottery/lotto-lib": ["libs/lotto-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

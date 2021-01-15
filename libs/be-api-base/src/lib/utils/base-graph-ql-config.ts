@@ -14,7 +14,8 @@ const BASE_CONFIG = Object.freeze({
   sortSchema: true,
   debug: !isProdStage,
   playground: !isProdStage,
-  introspection: !isProdStage
+  introspection: !isProdStage,
+  useGlobalPrefix: true
 });
 
 export const baseGraphQlConfig = (c: Partial<GqlModuleOptions> = {}): GqlModuleOptions => ({

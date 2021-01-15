@@ -184,6 +184,149 @@
           }
         }
       }
+    },
+    "loteria": {
+      "root": "apps/loteria",
+      "sourceRoot": "apps/loteria/src",
+      "projectType": "application",
+      "prefix": "loteria",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/loteria",
+            "main": "apps/loteria/src/main.ts",
+            "tsConfig": "apps/loteria/tsconfig.app.json",
+            "assets": [
+              "apps/loteria/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/loteria/src/environments/environment.ts",
+                  "with": "apps/loteria/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "loteria:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/loteria/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/loteria"
+          ],
+          "options": {
+            "jestConfig": "apps/loteria/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lotto-lib": {
+      "root": "libs/lotto-lib",
+      "sourceRoot": "libs/lotto-lib/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/lotto-lib/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/lotto-lib"
+          ],
+          "options": {
+            "jestConfig": "libs/lotto-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lotto": {
+      "root": "apps/lotto",
+      "sourceRoot": "apps/lotto/src",
+      "projectType": "application",
+      "prefix": "lotto",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/lotto",
+            "main": "apps/lotto/src/main.ts",
+            "tsConfig": "apps/lotto/tsconfig.app.json",
+            "assets": [
+              "apps/lotto/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/lotto/src/environments/environment.ts",
+                  "with": "apps/lotto/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "lotto:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/lotto/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/lotto"
+          ],
+          "options": {
+            "jestConfig": "apps/lotto/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
