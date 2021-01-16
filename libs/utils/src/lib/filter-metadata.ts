@@ -1,24 +1,25 @@
 import 'reflect-metadata';
 
 export const filterMetadata = (
-  TypeClass: { new (): any },
+  TypeClass: { new (): any }, // eslint-disable-line
   metadataKey: string,
   excludedValues: string[],
-  name?: string,
+  name?: string
 ): { new (): any } => {
+  // eslint-disable-line
   class CloneTypeClass extends TypeClass {}
 
   const metadata: string[] =
     Reflect.getMetadata(metadataKey, CloneTypeClass.prototype) || [];
   const metadataFiltered = metadata.filter(
-    item => excludedValues.indexOf(item) === -1,
+    (item) => excludedValues.indexOf(item) === -1
   );
   const className: string = name ? name : TypeClass.name;
 
   Reflect.defineMetadata(
     metadataKey,
     metadataFiltered,
-    CloneTypeClass.prototype,
+    CloneTypeClass.prototype
   );
 
   Object.defineProperty(CloneTypeClass, 'name', {

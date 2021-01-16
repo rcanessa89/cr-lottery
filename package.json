@@ -82,7 +82,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "nx workspace-lint",
-      "nx lint --fix",
+      "nx run-many --all --target=lint",
       "prettier --write",
       "git add"
     ],

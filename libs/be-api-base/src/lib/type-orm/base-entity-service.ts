@@ -1,5 +1,10 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { Repository, DeleteResult, FindManyOptions, FindOneOptions } from 'typeorm';
+import {
+  Repository,
+  DeleteResult,
+  FindManyOptions,
+  FindOneOptions,
+} from 'typeorm';
 
 import { ResolverFactoryOptions } from '../types/interfaces';
 
@@ -7,24 +12,30 @@ export abstract class BaseEntityService<T, CI, UI = Partial<CI>> {
   protected readonly repository: Repository<T>;
   private readonly options: ResolverFactoryOptions<T>;
 
-  constructor(repository: Repository<T>, options: ResolverFactoryOptions<T> = {}) {
+  constructor(
+    repository: Repository<T>,
+    options: ResolverFactoryOptions<T> = {}
+  ) {
     this.repository = repository;
     this.options = {
       create: {},
       findAll: {},
       findOne: {},
-      ...options
+      ...options,
     };
   }
 
   public findAll(options: FindManyOptions<T> = {}): Promise<T[]> {
     return this.repository.find({
       ...this.options.findAll,
-      ...options
+      ...options,
     });
   }
 
-  public findOne(id: string | number, options: FindOneOptions<T> = {}): Promise<T> {
+  public findOne(
+    id: string | number,
+    options: FindOneOptions<T> = {}
+  ): Promise<T> {
     const parsedId = Number(id);
 
     if (isNaN(parsedId)) {
@@ -33,18 +44,18 @@ export abstract class BaseEntityService<T, CI, UI = Partial<CI>> {
 
     return this.repository.findOne(parsedId, {
       ...this.options.findOne,
-      ...options
+      ...options,
     });
   }
 
   public create(item: CI): Promise<T> {
-    console.log('create/item =>', item)
+    console.log('create/item =>', item);
 
     return this.repository.save(item, this.options.create);
   }
 
   public async update(item: UI): Promise<T> {
-    const id: number | string = (<any>item).id;
+    const id: number | string = (<any>item).id; // eslint-disable-line
 
     try {
       await this.repository.update(id, item);

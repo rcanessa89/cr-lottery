@@ -1,12 +1,4 @@
-import {
-  Body,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query
-} from '@nestjs/common';
+import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import {
   ApiTags,
   ApiBadRequestResponse,
@@ -14,10 +6,14 @@ import {
   ApiCreatedResponse,
   ApiQuery,
   ApiOkResponse,
-  ApiParam
+  ApiParam,
 } from '@nestjs/swagger';
 
-import { filterMetadata, pluralize, ConditionalDecorator } from '@cr-lottery/utils';
+import {
+  filterMetadata,
+  pluralize,
+  ConditionalDecorator,
+} from '@cr-lottery/utils';
 import { ControllerSwaggerFactoryArgs } from '../types/interfaces';
 
 const metadataKey = 'swagger/apiModelPropertiesArray';
@@ -28,24 +24,29 @@ export const controllerSwaggerFactory = <T, C, U>({
   Entity,
   CreateVM,
   UpdateVM,
-  ApiException
+  ApiException,
 }: ControllerSwaggerFactoryArgs<T, C, U>): any => {
+  // eslint-disable-line
   const ctrlApiTag = pluralize(Entity.name);
   const createEntityName = `Create${Entity.name}`;
   const updateEntityName = `Update${Entity.name}`;
 
-  CreateVM = CreateVM || filterMetadata(
-    Entity,
-    metadataKey,
-    excludedCreateMetadata,
-    createEntityName
-  );
-  UpdateVM = UpdateVM || filterMetadata(
-    Entity,
-    metadataKey,
-    excludedUpdateMetadata,
-    updateEntityName
-  );
+  CreateVM =
+    CreateVM ||
+    filterMetadata(
+      Entity,
+      metadataKey,
+      excludedCreateMetadata,
+      createEntityName
+    );
+  UpdateVM =
+    UpdateVM ||
+    filterMetadata(
+      Entity,
+      metadataKey,
+      excludedUpdateMetadata,
+      updateEntityName
+    );
 
   @ApiTags(ctrlApiTag)
   abstract class BaseController {
@@ -73,7 +74,7 @@ export const controllerSwaggerFactory = <T, C, U>({
     @ApiQuery({
       name: 'options',
       description: 'ORM find all options',
-      required: false
+      required: false,
     })
     @ApiOkResponse({
       type: Entity,
@@ -108,11 +109,11 @@ export const controllerSwaggerFactory = <T, C, U>({
     @ApiQuery({
       name: 'options',
       description: 'ORM find one options',
-      required: false
+      required: false,
     })
     @ApiParam({
       name: 'id',
-      description: 'Entity ID'
+      description: 'Entity ID',
     })
     @ApiOkResponse({ type: Entity })
     @ConditionalDecorator(
@@ -151,7 +152,7 @@ export const controllerSwaggerFactory = <T, C, U>({
     @Delete(':id')
     @ApiParam({
       name: 'id',
-      description: 'Entity ID'
+      description: 'Entity ID',
     })
     remove(@Param('id') id: string | number) {
       return this.service.remove(id);

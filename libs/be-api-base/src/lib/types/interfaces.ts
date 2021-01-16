@@ -14,7 +14,7 @@ export interface ResolverFactoryArgs<T, CI, UI> {
 
 export interface ControllerSwaggerFactoryArgs<T, C, U> {
   Entity: { new (): T };
-  CreateVM?: { new (): T };
-  UpdateVM?: { new (): T };
-  ApiException?: { new (): any };
+  CreateVM?: { new (): C };
+  UpdateVM?: { new (): U };
+  ApiException?: { new (): any }; // eslint-disable-line
 }

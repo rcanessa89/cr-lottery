@@ -8,7 +8,7 @@ import {
   Int,
   PartialType,
   InputType,
-  Field
+  Field,
 } from '@nestjs/graphql';
 
 import { pluralize } from '@cr-lottery/utils';
@@ -17,12 +17,13 @@ import { FindOneArgs, FindAllArgs } from '../type-orm/object-types';
 
 @Injectable()
 class TransformBodyPipe implements PipeTransform {
-  transform(value: any) {
+  transform(value) {
     return JSON.parse(JSON.stringify(value));
   }
 }
 
 const UpdateInputFactory = (Input, entityName: string): any => {
+  // eslint-disable-line
   const updateInputName = `Update${entityName}Input`;
 
   @InputType(updateInputName)
@@ -32,13 +33,14 @@ const UpdateInputFactory = (Input, entityName: string): any => {
   }
 
   return UpdateInput;
-}
+};
 
 export const resolverFactory = <T, CI, UI extends { id: number }>({
   Entity,
   CreateInput,
-  UpdateInput
+  UpdateInput,
 }: ResolverFactoryArgs<T, CI, UI>): any => {
+  // eslint-disable-line
   const lowerFirstLetter = (s): string => {
     return s[0].toLowerCase() + s.slice(1);
   };
@@ -61,7 +63,7 @@ export const resolverFactory = <T, CI, UI extends { id: number }>({
     }
 
     @Query(() => [Entity], { name: findAllName })
-    findAll(@Args(TransformBodyPipe) { options }: FindAllArgs,): T[] {
+    findAll(@Args(TransformBodyPipe) { options }: FindAllArgs): T[] {
       return this.service.findAll(options);
     }
 
@@ -76,12 +78,26 @@ export const resolverFactory = <T, CI, UI extends { id: number }>({
     }
 
     @Mutation(() => Entity, { name: createName })
-    create(@Args(lowerFirstLetter(CreateInput.name), { type: () => CreateInput }, TransformBodyPipe) createInput: CI): T {
+    create(
+      @Args(
+        lowerFirstLetter(CreateInput.name),
+        { type: () => CreateInput },
+        TransformBodyPipe
+      )
+      createInput: CI
+    ): T {
       return this.service.create(createInput);
     }
 
     @Mutation(() => Entity, { name: updateName })
-    update(@Args(lowerFirstLetter(UpdateInput.name), { type: () => UpdateInput }, TransformBodyPipe) updateInput: UI) {
+    update(
+      @Args(
+        lowerFirstLetter(UpdateInput.name),
+        { type: () => UpdateInput },
+        TransformBodyPipe
+      )
+      updateInput: UI
+    ) {
       return this.service.update(updateInput.id, updateInput);
     }
 
@@ -92,4 +108,4 @@ export const resolverFactory = <T, CI, UI extends { id: number }>({
   }
 
   return BaseResolver;
-}
+};

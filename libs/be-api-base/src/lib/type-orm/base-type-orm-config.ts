@@ -19,11 +19,13 @@ const BASE_CONFIG = Object.freeze<Partial<TypeOrmModuleOptions>>({
   password: envValues.dbPassword,
   port: Number(envValues.dbPort),
   host: envValues.dbHost,
-  username: envValues.dbUsername
+  username: envValues.dbUsername,
 });
 
-export const baseTypeOrmConfig = (c: Partial<TypeOrmModuleOptions> = {}): TypeOrmModuleOptions => {
-  let config: any = {};
+export const baseTypeOrmConfig = (
+  c: Partial<TypeOrmModuleOptions> = {}
+): TypeOrmModuleOptions => {
+  let config: any = {}; // eslint-disable-line
 
   try {
     config = JSON.parse(envValues.dbSecret);
@@ -36,6 +38,6 @@ export const baseTypeOrmConfig = (c: Partial<TypeOrmModuleOptions> = {}): TypeOr
   return {
     ...BASE_CONFIG,
     ...config,
-    ...c
-  }
+    ...c,
+  };
 };
