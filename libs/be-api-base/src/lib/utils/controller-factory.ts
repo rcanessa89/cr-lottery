@@ -1,7 +1,7 @@
 import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
+// eslint-disable-next-line
 export const controllerFactory = (): any => {
-  // eslint-disable-line
   abstract class BaseController {
     protected readonly service;
 

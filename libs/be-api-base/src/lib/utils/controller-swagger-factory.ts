@@ -25,8 +25,8 @@ export const controllerSwaggerFactory = <T, C, U>({
   CreateVM,
   UpdateVM,
   ApiException,
-}: ControllerSwaggerFactoryArgs<T, C, U>): any => {
-  // eslint-disable-line
+}: // eslint-disable-next-line
+ControllerSwaggerFactoryArgs<T, C, U>): any => {
   const ctrlApiTag = pluralize(Entity.name);
   const createEntityName = `Create${Entity.name}`;
   const updateEntityName = `Update${Entity.name}`;

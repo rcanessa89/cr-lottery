@@ -22,8 +22,8 @@ class TransformBodyPipe implements PipeTransform {
   }
 }
 
+// eslint-disable-next-line
 const UpdateInputFactory = (Input, entityName: string): any => {
-  // eslint-disable-line
   const updateInputName = `Update${entityName}Input`;
 
   @InputType(updateInputName)
@@ -39,8 +39,8 @@ export const resolverFactory = <T, CI, UI extends { id: number }>({
   Entity,
   CreateInput,
   UpdateInput,
-}: ResolverFactoryArgs<T, CI, UI>): any => {
-  // eslint-disable-line
+}: // eslint-disable-next-line
+ResolverFactoryArgs<T, CI, UI>): any => {
   const lowerFirstLetter = (s): string => {
     return s[0].toLowerCase() + s.slice(1);
   };
