@@ -16,6 +16,7 @@ export class ProductResourceController {
   @Get('seed/:product/:page')
   async seed(@Param('product') product, @Param('page') page = 0) {
     const data = await this.productResourceHttpService.request(product, page);
+    // eslint-disable-next-line
     const mappedData: any = data.map((p) =>
       this.productDrawMapper.mapByProduct(product, p)
     );
