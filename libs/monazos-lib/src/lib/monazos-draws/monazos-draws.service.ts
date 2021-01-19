@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { BaseEntityService } from '@cr-lottery/be-api-base';
+import { BaseEntityService } from '@cr-lottery/be-api-base/base-entity-service';
 import { MonazosDraw } from './monazos-draw.entity';
 import { CreateMonazosDrawInput } from './create-monazos-draw.input';
 

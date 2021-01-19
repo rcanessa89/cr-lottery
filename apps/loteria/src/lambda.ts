@@ -2,7 +2,7 @@ import { Server } from 'http';
 import { Context, APIGatewayProxyHandler, Event } from 'aws-lambda';
 import { proxy, Response } from 'aws-serverless-express';
 
-import { bootstrap } from '@cr-lottery/utils';
+import { bootstrap } from '@cr-lottery/utils/bootstrap';
 import { AppModule } from './app/app.module';
 
 let cachedServer: Server;

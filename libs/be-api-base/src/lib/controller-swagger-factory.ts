@@ -9,12 +9,10 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 
-import {
-  filterMetadata,
-  pluralize,
-  ConditionalDecorator,
-} from '@cr-lottery/utils';
-import { ControllerSwaggerFactoryArgs } from '../types/interfaces';
+import { filterMetadata } from '@cr-lottery/utils/filter-metadata';
+import { pluralize } from '@cr-lottery/utils/pluralize';
+import { ConditionalDecorator } from '@cr-lottery/utils/conditional-decorator';
+import { ControllerSwaggerFactoryArgs } from './interfaces';
 
 const metadataKey = 'swagger/apiModelPropertiesArray';
 const excludedCreateMetadata = [':id', ':createdAt', ':updatedAt'];

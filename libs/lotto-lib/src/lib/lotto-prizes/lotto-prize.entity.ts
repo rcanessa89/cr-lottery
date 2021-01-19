@@ -1,7 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
-import { BaseGQLEntity } from '@cr-lottery/be-api-base';
+import { BaseGQLEntity } from '@cr-lottery/be-api-base/base-gql-entity';
 import { LottoDraw } from '../lotto-draws/lotto-draw.entity';
 
 @ObjectType()
@@ -48,6 +48,9 @@ export class LottoPrize extends BaseGQLEntity {
   acumuladoRevancha: number;
 
   @Field(() => LottoDraw)
-  @OneToOne(() => LottoDraw, draw => draw.prizes)
+  @OneToOne(() => LottoDraw, (lottoDraw) => lottoDraw.prizes, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn()
   draw;
 }

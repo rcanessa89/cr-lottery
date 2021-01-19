@@ -6,7 +6,7 @@ import {
   FindOneOptions,
 } from 'typeorm';
 
-import { ResolverFactoryOptions } from '../types/interfaces';
+import { ResolverFactoryOptions } from './interfaces';
 
 export abstract class BaseEntityService<T, CI, UI = Partial<CI>> {
   protected readonly repository: Repository<T>;

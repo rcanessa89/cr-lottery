@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 
-import { CreateDrawInputBase } from '@cr-lottery/be-api-base';
+import { CreateDrawInputBase } from '@cr-lottery/be-api-base/create-draw-input-base';
 import { CreateLoteriaResultInput } from '../loteria-results/create-loteria-result.input';
 
 @InputType()

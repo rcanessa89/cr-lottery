@@ -1,15 +1,22 @@
-import { Field, registerEnumType, ArgsType, ID, InputType } from '@nestjs/graphql';
+import {
+  Field,
+  registerEnumType,
+  ArgsType,
+  ID,
+  InputType,
+  ObjectType,
+} from '@nestjs/graphql';
 
 export enum FindOrder {
   ASC = 'ASC',
-  DESC = 'DESC'
+  DESC = 'DESC',
 }
 
 registerEnumType(FindOrder, { name: 'FindOrder' });
 
 @InputType()
 export class FindOneOptions {
-  @Field(() => String,{ nullable: true })
+  @Field(() => String, { nullable: true })
   where?;
 
   @Field(() => [String], { nullable: true })
@@ -34,11 +41,22 @@ export class FindOneArgs {
   id: number;
 
   @Field(() => FindOneOptions, { nullable: true })
-  options?: FindOneOptions
+  options?: FindOneOptions;
 }
 
 @ArgsType()
 export class FindAllArgs {
   @Field(() => FindAllOptions, { nullable: true })
-  options?: FindAllOptions
+  options?: FindAllOptions;
+}
+
+@ObjectType()
+export class RemoveResult {
+  @Field()
+  raw: string;
+
+  @Field({
+    nullable: true,
+  })
+  affected?: number;
 }

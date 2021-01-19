@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, OneToOne } from 'typeorm';
 
-import { DrawBaseEntity } from '@cr-lottery/be-api-base';
+import { DrawBaseEntity } from '@cr-lottery/be-api-base/draw-base-entity';
 import { LottoPrize } from '../lotto-prizes/lotto-prize.entity';
 
 @ObjectType()
@@ -16,9 +16,6 @@ export class LottoDraw extends DrawBaseEntity {
   numbersRevenge: number[];
 
   @Field(() => LottoPrize)
-  @OneToOne(() => LottoPrize, prizes => prizes.draw, {
-    cascade: true
-  })
-  @JoinColumn()
+  @OneToOne(() => LottoPrize, (lottoPrize) => lottoPrize.draw)
   prizes: LottoPrize;
 }

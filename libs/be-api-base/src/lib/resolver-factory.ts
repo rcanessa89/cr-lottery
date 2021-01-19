@@ -11,9 +11,9 @@ import {
   Field,
 } from '@nestjs/graphql';
 
-import { pluralize } from '@cr-lottery/utils';
-import { ResolverFactoryArgs } from '../types/interfaces';
-import { FindOneArgs, FindAllArgs } from '../type-orm/object-types';
+import { pluralize } from '@cr-lottery/utils/pluralize';
+import { ResolverFactoryArgs } from './interfaces';
+import { FindOneArgs, FindAllArgs, RemoveResult } from './object-types';
 
 @Injectable()
 class TransformBodyPipe implements PipeTransform {
@@ -101,7 +101,7 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       return this.service.update(updateInput.id, updateInput);
     }
 
-    @Mutation(() => Entity, { name: removeName })
+    @Mutation(() => RemoveResult, { name: removeName })
     remove(@Args('id', { type: () => ID }, TransformBodyPipe) id: number) {
       return this.service.remove(id);
     }

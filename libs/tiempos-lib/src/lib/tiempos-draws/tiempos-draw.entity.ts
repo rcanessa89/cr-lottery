@@ -2,10 +2,10 @@ import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity } from 'typeorm';
 
 import { DrawTime } from '@cr-lottery/types';
-import { DrawBaseEntity } from '@cr-lottery/be-api-base';
+import { DrawBaseEntity } from '@cr-lottery/be-api-base/draw-base-entity';
 
 registerEnumType(DrawTime, {
-  name: 'DrawTime'
+  name: 'DrawTime',
 });
 
 @ObjectType()
@@ -14,7 +14,7 @@ export class TiemposDraw extends DrawBaseEntity {
   @Field(() => DrawTime)
   @Column({
     type: 'enum',
-    enum: DrawTime
+    enum: DrawTime,
   })
   time: DrawTime;
 

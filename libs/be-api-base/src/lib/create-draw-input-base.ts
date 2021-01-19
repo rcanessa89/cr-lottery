@@ -1,11 +1,11 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, ID, InputType } from '@nestjs/graphql';
 
 @InputType({
-  isAbstract: true
+  isAbstract: true,
 })
 export abstract class CreateDrawInputBase {
-  @Field()
-  drawNumber: number;
+  @Field(() => ID)
+  id: number;
 
   @Field()
   date: Date;

@@ -1,11 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, ManyToOne } from 'typeorm';
 
-import { BaseGQLEntity } from '@cr-lottery/be-api-base';
+import { BaseGQLEntity } from '@cr-lottery/be-api-base/base-gql-entity';
 import { LoteriaDraw } from '../loteria-draws/loteria-draw.entity';
 
 @ObjectType()
 @Entity()
+@Index(['order', 'number', 'series', 'draw'], { unique: true })
 export class LoteriaResult extends BaseGQLEntity {
   @Field()
   @Column()
@@ -23,7 +24,9 @@ export class LoteriaResult extends BaseGQLEntity {
   @Column()
   prize: number;
 
-  @ManyToOne(() => LoteriaDraw, loteriaDraw => loteriaDraw.results)
+  @ManyToOne(() => LoteriaDraw, (loteriaDraw) => loteriaDraw.results, {
+    onDelete: 'CASCADE',
+  })
   @Field(() => [LoteriaDraw])
   draw;
 }

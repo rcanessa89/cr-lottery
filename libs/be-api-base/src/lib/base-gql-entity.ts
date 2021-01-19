@@ -2,12 +2,12 @@ import {
   BaseEntity as TypeORMBaseEntity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType({
-  isAbstract: true
+  isAbstract: true,
 })
 export abstract class BaseGQLEntity extends TypeORMBaseEntity {
   @Field(() => ID)

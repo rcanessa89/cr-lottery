@@ -1,10 +1,10 @@
 import { InputType, Field, registerEnumType } from '@nestjs/graphql';
 
 import { DrawTime } from '@cr-lottery/types';
-import { CreateDrawInputBase } from '@cr-lottery/be-api-base';
+import { CreateDrawInputBase } from '@cr-lottery/be-api-base/create-draw-input-base';
 
 registerEnumType(DrawTime, {
-  name: 'DrawTime'
+  name: 'DrawTime',
 });
 
 @InputType()

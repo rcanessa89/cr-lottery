@@ -1,5 +1,6 @@
 import { Stack, App, StackProps } from '@serverless-stack/resources';
-import { SubnetType, Vpc } from '@aws-cdk/aws-ec2';
+import { CfnRoute, SubnetType, Vpc } from '@aws-cdk/aws-ec2';
+import { CfnOutput } from '@aws-cdk/core';
 
 import { VPC_INSTANCE_ID } from '../constants';
 
@@ -16,10 +17,25 @@ export class VpcStack extends Stack {
         {
           cidrMask: 24,
           name: 'publicSubnet',
-          subnetType: SubnetType.PUBLIC
-        }
+          subnetType: SubnetType.PUBLIC,
+        },
+        {
+          cidrMask: 24,
+          name: 'privateSubnet',
+          subnetType: SubnetType.PRIVATE,
+        },
       ],
-      natGateways: 0
+      natGateways: 1,
+    });
+
+    new CfnOutput(this, 'publicSubnetId', {
+      value: this.vpc.publicSubnets[0].subnetId,
+      exportName: scope.logicalPrefixedName('publicSubnetId'),
+    });
+
+    new CfnOutput(this, 'privateSubnetId', {
+      value: this.vpc.privateSubnets[0].subnetId,
+      exportName: scope.logicalPrefixedName('privateSubnetId'),
     });
   }
 }

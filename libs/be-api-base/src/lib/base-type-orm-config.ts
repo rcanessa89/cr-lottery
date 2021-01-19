@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-import { envValues, isProd } from '@cr-lottery/utils';
+import { envValues } from '@cr-lottery/utils/env-values';
+import { isProd } from '@cr-lottery/utils/is-prod';
 
 const isProdStage = isProd();
 

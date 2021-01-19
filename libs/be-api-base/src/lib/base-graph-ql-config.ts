@@ -1,6 +1,6 @@
 import { GqlModuleOptions } from '@nestjs/graphql';
 
-import { isProd } from '@cr-lottery/utils';
+import { isProd } from '@cr-lottery/utils/is-prod';
 
 const isProdStage = isProd();
 
@@ -15,10 +15,12 @@ const BASE_CONFIG = Object.freeze({
   debug: !isProdStage,
   playground: !isProdStage,
   introspection: !isProdStage,
-  useGlobalPrefix: true
+  useGlobalPrefix: true,
 });
 
-export const baseGraphQlConfig = (c: Partial<GqlModuleOptions> = {}): GqlModuleOptions => ({
+export const baseGraphQlConfig = (
+  c: Partial<GqlModuleOptions> = {}
+): GqlModuleOptions => ({
   ...BASE_CONFIG,
-  ...c
+  ...c,
 });

@@ -25,7 +25,6 @@ custom:
       - '@nestjs/websockets/socket-module'
       - 'class-transformer/storage'
       - 'fastify-swagger'
-    # These dependencies most be include it in case to use MySql and/or GraphQL
     forceInclude:
       - mysql
 
@@ -43,7 +42,8 @@ provider:
     securityGroupIds:
       - !ImportValue '${self:custom.sstApp}-securityGroupId'
     subnetIds:
-      - !ImportValue '${self:custom.sstApp}-subnetId'
+      - !ImportValue '${self:custom.sstApp}-publicSubnetId'
+      - !ImportValue '${self:custom.sstApp}-privateSubnetId'
   apiGateway:
     shouldStartNameWithService: true
   iamRoleStatements:
@@ -87,4 +87,18 @@ functions:
       - http:
           path: /tiempos/graphql
           method: post
+          cors: true
+  product-resource:
+    handler: ./apps/product-resource/src/lambda.handler
+    events:
+      - http:
+          path: /product-resource/seed/{product}/{page}
+          method: get
+          cors: true
+  monolithic:
+    handler: ./apps/monolithic/src/lambda.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
           cors: true

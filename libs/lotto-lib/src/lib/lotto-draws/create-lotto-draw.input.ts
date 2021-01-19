@@ -1,6 +1,6 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
 
-import { CreateDrawInputBase } from '@cr-lottery/be-api-base';
+import { CreateDrawInputBase } from '@cr-lottery/be-api-base/create-draw-input-base';
 import { CreateLottoPrizeInput } from '../lotto-prizes/create-lotto-prize.input';
 
 @InputType()
@@ -12,5 +12,5 @@ export class CreateLottoDrawInput extends CreateDrawInputBase {
   numbersRevenge: number[];
 
   @Field(() => CreateLottoPrizeInput)
-  prizes: CreateLottoPrizeInput
+  prizes: CreateLottoPrizeInput;
 }

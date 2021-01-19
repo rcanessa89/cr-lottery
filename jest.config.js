@@ -16,5 +16,8 @@ module.exports = {
     '<rootDir>/apps/monazos',
     '<rootDir>/libs/tiempos-lib',
     '<rootDir>/apps/tiempos',
+    '<rootDir>/libs/product-resource-lib',
+    '<rootDir>/apps/product-resource',
+    '<rootDir>/apps/monolithic',
   ],
 };

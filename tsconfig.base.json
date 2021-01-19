@@ -15,14 +15,17 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cr-lottery/utils": ["libs/utils/src/index.ts"],
+      "@cr-lottery/utils/*": ["libs/utils/src/lib/*"],
       "@cr-lottery/types": ["libs/types/src/index.ts"],
-      "@cr-lottery/be-api-base": ["libs/be-api-base/src/index.ts"],
+      "@cr-lottery/be-api-base/*": ["libs/be-api-base/src/lib/*"],
       "@cr-lottery/chances-lib": ["libs/chances-lib/src/index.ts"],
       "@cr-lottery/loteria-lib": ["libs/loteria-lib/src/index.ts"],
       "@cr-lottery/lotto-lib": ["libs/lotto-lib/src/index.ts"],
       "@cr-lottery/monazos-lib": ["libs/monazos-lib/src/index.ts"],
-      "@cr-lottery/tiempos-lib": ["libs/tiempos-lib/src/index.ts"]
+      "@cr-lottery/tiempos-lib": ["libs/tiempos-lib/src/index.ts"],
+      "@cr-lottery/product-resource-lib": [
+        "libs/product-resource-lib/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
