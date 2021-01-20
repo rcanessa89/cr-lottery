@@ -42,7 +42,7 @@ export class ProductDrawMapper {
       date: product.fecha,
       validity: product.vigencia,
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
-        drawId: product.numeroSorteo,
+        draw: product.numeroSorteo,
         order: prize.orden,
         number: prize.numero,
         series: prize.serie,
@@ -57,7 +57,7 @@ export class ProductDrawMapper {
       date: product.fecha,
       validity: product.vigencia,
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
-        drawId: product.numeroSorteo,
+        draw: product.numeroSorteo,
         order: prize.orden,
         number: prize.numero,
         series: prize.serie,
@@ -74,7 +74,7 @@ export class ProductDrawMapper {
       numbers: product.numeros.join(),
       numbersRevenge: product.numerosRevancha.join(),
       prizes: {
-        drawId: product.numeroSorteo,
+        draw: product.numeroSorteo,
         dosAciertos: product.premiosLotto.dosAciertos,
         tresAciertos: product.premiosLotto.tresAciertos,
         cuatroAciertos: product.premiosLotto.cuatroAciertos,

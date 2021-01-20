@@ -9,13 +9,13 @@ import { JPS_API_URL_BASE, JPS_API_LAST_ROUTE } from './constants';
 export class ProductResourceHttpService {
   constructor(private readonly httpService: HttpService) {}
 
-  public async request(product: Product, page = 0) {
+  public async request(product: Product, page = 0, length = 300) {
     const lastProductUrl = this.getRequestUrl(product, JPS_API_LAST_ROUTE);
     const lastProductRes = await this.httpService
       .get(lastProductUrl)
       .toPromise();
     const lastDrawNumber = this.getLastDrawNumber(lastProductRes.data);
-    const drawsNumbers = this.getDrawsNumbers(lastDrawNumber, page);
+    const drawsNumbers = this.getDrawsNumbers(lastDrawNumber, page, length);
     const productsDataPromises = drawsNumbers.map((dn) => {
       const requestUrl = this.getRequestUrl(product, dn);
 
@@ -31,10 +31,13 @@ export class ProductResourceHttpService {
     return Promise.all(productsDataPromises);
   }
 
-  private getDrawsNumbers(lastDrawNumber: number, page: number): number[] {
-    const pageSize = 2;
-    const start = lastDrawNumber - page * pageSize;
-    const end = start - pageSize;
+  private getDrawsNumbers(
+    lastDrawNumber: number,
+    page: number,
+    length: number
+  ): number[] {
+    const start = lastDrawNumber - page * length;
+    const end = start - length;
     const result = [];
 
     for (let index = start; index > end; index--) {

@@ -13,11 +13,17 @@ export class ProductResourceController {
     private readonly resourceDataService: ResourceDataService
   ) {}
 
-  @Get('seed/:product/:page')
-  async seed(@Param('product') product, @Param('page') page = 0) {
-    const data = await this.productResourceHttpService.request(product, page);
-    // eslint-disable-next-line
-    const mappedData: any = data.map((p) =>
+  @Get(['seed/:product/:page/:length', 'seed/:product/:page'])
+  async seed(
+    @Param('product') product,
+    @Param('page') page = 0,
+    @Param('length') length = 2
+  ) {
+    const lengthNumber = Number(length);
+    const data = (
+      await this.productResourceHttpService.request(product, page, lengthNumber)
+    ).filter((d) => d.tipoSorteoCode);
+    const mappedData = data.map((p) =>
       this.productDrawMapper.mapByProduct(product, p)
     );
     const bulkData = uniqBy(

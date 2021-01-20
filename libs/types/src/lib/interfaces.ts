@@ -1,5 +1,9 @@
 import { INestApplication } from '@nestjs/common';
 
+export interface ObjectLiteral {
+  [key: string]: any;
+}
+
 export interface RdsInstanceSecret {
   password: string;
   engine: string;

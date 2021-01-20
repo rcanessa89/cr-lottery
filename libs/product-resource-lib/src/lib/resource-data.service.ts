@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Connection, getConnection } from 'typeorm';
 
-import { Product } from '@cr-lottery/types';
+import { Product, ObjectLiteral } from '@cr-lottery/types';
 
 @Injectable()
 export class ResourceDataService {
@@ -11,36 +11,75 @@ export class ResourceDataService {
     this.connection = getConnection();
   }
 
-  public async bulk(product: Product, values) {
+  public async bulk(product: Product, values: ObjectLiteral[]) {
     const { drawTable, relationTable, relation } = this.getEntityMetadata(
       product
     );
-    const relationValues = relation
-      ? values.map((v) => [...v[relation]]).flat()
-      : [];
-    const drawValues = values.map((v) => {
+    const relationValues = this.getRelationValues(relation, values);
+    const relationColumns = this.getColumns(relationValues);
+    const drawValues = this.getDrawValues(relation, values);
+
+    try {
+      await this.connection
+        .createQueryBuilder()
+        .insert()
+        .orIgnore()
+        .into(drawTable, Object.keys(drawValues[0]))
+        .values(drawValues)
+        .execute();
+
+      await this.connection
+        .createQueryBuilder()
+        .insert()
+        .orIgnore()
+        .into(relationTable, relationColumns)
+        .values(relationValues)
+        .execute();
+    } catch (e) {
+      return e;
+    }
+  }
+
+  private getDrawValues(
+    relation: string,
+    values: ObjectLiteral[]
+  ): ObjectLiteral[] {
+    return values.map((v) => {
       const copy = { ...v };
 
       delete copy[relation];
 
       return copy;
     });
+  }
 
-    await this.connection
-      .createQueryBuilder()
-      .insert()
-      .orIgnore()
-      .into(drawTable, Object.keys(drawValues[0]))
-      .values(drawValues)
-      .execute();
+  private getRelationValues(
+    relation: string,
+    values: ObjectLiteral[]
+  ): ObjectLiteral[] {
+    return relation
+      ? values
+          .map((v) => {
+            const data: ObjectLiteral[] = v[relation];
 
-    await this.connection
-      .createQueryBuilder()
-      .insert()
-      .orIgnore()
-      .into(relationTable, Object.keys(relationValues[0]))
-      .values(relationValues)
-      .execute();
+            return [...data];
+          })
+          .flat()
+      : [];
+  }
+
+  private getColumns(values: ObjectLiteral[]) {
+    if (!values.length) {
+      return [];
+    }
+
+    const columns = Object.keys(values[0]);
+
+    if (columns.indexOf('draw') > -1) {
+      columns.push('draw.id');
+    }
+
+    return columns;
   }
 
   private getEntityMetadata(product: Product) {

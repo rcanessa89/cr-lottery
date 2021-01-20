@@ -1,11 +1,26 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 
 import { BaseGQLEntity } from '@cr-lottery/be-api-base/base-gql-entity';
 import { LottoDraw } from '../lotto-draws/lotto-draw.entity';
 
 @ObjectType()
 @Entity()
+@Index(
+  [
+    'dosAciertos',
+    'tresAciertos',
+    'cuatroAciertos',
+    'cincoAciertos',
+    'acumulado',
+    'dosAciertosRevancha',
+    'tresAciertosRevancha',
+    'cuatroAciertosRevancha',
+    'cincoAciertosRevancha',
+    'acumuladoRevancha',
+  ],
+  { unique: true }
+)
 export class LottoPrize extends BaseGQLEntity {
   @Field()
   @Column()

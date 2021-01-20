@@ -8,6 +8,7 @@ import { ChancesLibModule } from '@cr-lottery/chances-lib';
 import { LoteriaLibModule } from '@cr-lottery/loteria-lib';
 import { MonazosLibModule } from '@cr-lottery/monazos-lib';
 import { TiemposLibModule } from '@cr-lottery/tiempos-lib';
+import { LottoLibModule } from '@cr-lottery/lotto-lib';
 import { ProductResourceLibModule } from '@cr-lottery/product-resource-lib';
 
 @Module({
@@ -18,6 +19,7 @@ import { ProductResourceLibModule } from '@cr-lottery/product-resource-lib';
     LoteriaLibModule,
     MonazosLibModule,
     TiemposLibModule,
+    LottoLibModule,
     ProductResourceLibModule,
   ],
 })

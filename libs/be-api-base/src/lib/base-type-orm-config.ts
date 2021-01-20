@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { envValues } from '@cr-lottery/utils/env-values';
 import { isProd } from '@cr-lottery/utils/is-prod';
+import { ObjectLiteral } from '@cr-lottery/types';
 
 const isProdStage = isProd();
 
@@ -26,7 +27,7 @@ const BASE_CONFIG = Object.freeze<Partial<TypeOrmModuleOptions>>({
 export const baseTypeOrmConfig = (
   c: Partial<TypeOrmModuleOptions> = {}
 ): TypeOrmModuleOptions => {
-  let config: any = {}; // eslint-disable-line
+  let config: ObjectLiteral = {};
 
   try {
     config = JSON.parse(envValues.dbSecret);
@@ -36,9 +37,11 @@ export const baseTypeOrmConfig = (
     config = BASE_CONFIG;
   }
 
-  return {
+  const baseConfig = {
     ...BASE_CONFIG,
     ...config,
     ...c,
   };
+
+  return baseConfig as TypeOrmModuleOptions;
 };
