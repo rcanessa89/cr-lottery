@@ -496,57 +496,6 @@
         }
       }
     },
-    "monolithic": {
-      "root": "apps/monolithic",
-      "sourceRoot": "apps/monolithic/src",
-      "projectType": "application",
-      "prefix": "monolithic",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/monolithic",
-            "main": "apps/monolithic/src/main.ts",
-            "tsConfig": "apps/monolithic/tsconfig.app.json",
-            "assets": ["apps/monolithic/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/monolithic/src/environments/environment.ts",
-                  "with": "apps/monolithic/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "monolithic:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/monolithic/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/monolithic"],
-          "options": {
-            "jestConfig": "apps/monolithic/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "draw-lib": {
       "root": "libs/draw-lib",
       "sourceRoot": "libs/draw-lib/src",
