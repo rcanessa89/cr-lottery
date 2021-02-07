@@ -1,9 +1,9 @@
 import { Resolver } from '@nestjs/graphql';
 
 import { resolverFactory } from '@cr-lottery/be-api-base/resolver-factory';
+import { LoteriaResult } from '@cr-lottery/models/loteria/loteria-result.entity';
+import { CreateLoteriaResultInput } from '@cr-lottery/models/loteria/create-loteria-result.input';
 import { LoteriaResultsService } from './loteria-results.service';
-import { LoteriaResult } from './loteria-result.entity';
-import { CreateLoteriaResultInput } from './create-loteria-result.input';
 
 const BaseResolver = resolverFactory({
   Entity: LoteriaResult,

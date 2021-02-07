@@ -25,7 +25,9 @@
       "@cr-lottery/tiempos-lib": ["libs/tiempos-lib/src/index.ts"],
       "@cr-lottery/product-resource-lib": [
         "libs/product-resource-lib/src/index.ts"
-      ]
+      ],
+      "@cr-lottery/draw-lib": ["libs/draw-lib/src/index.ts"],
+      "@cr-lottery/models/*": ["libs/models/src//lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

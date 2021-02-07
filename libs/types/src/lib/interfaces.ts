@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 
 export interface ObjectLiteral {
-  [key: string]: any;
+  [key: string]: any; // eslint-disable-line
 }
 
 export interface RdsInstanceSecret {

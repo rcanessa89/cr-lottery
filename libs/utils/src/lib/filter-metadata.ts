@@ -5,8 +5,8 @@ export const filterMetadata = (
   metadataKey: string,
   excludedValues: string[],
   name?: string
+  // eslint-disable-next-line
 ): { new (): any } => {
-  // eslint-disable-line
   class CloneTypeClass extends TypeClass {}
 
   const metadata: string[] =

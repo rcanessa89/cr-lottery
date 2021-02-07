@@ -1,17 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { getDBEntities } from '@cr-lottery/be-api-base/base-type-orm-config';
 import { ChancesResultsService } from './chances-results.service';
 import { ChancesResultsResolver } from './chances-results.resolver';
-import { ChancesResult } from './chances-result.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([ ChancesResult ])
-  ],
-  providers: [
-    ChancesResultsResolver,
-    ChancesResultsService
-  ]
+  imports: [TypeOrmModule.forFeature(getDBEntities())],
+  providers: [ChancesResultsResolver, ChancesResultsService],
 })
 export class ChancesResultsModule {}

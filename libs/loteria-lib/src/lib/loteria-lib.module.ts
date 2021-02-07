@@ -1,12 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { LoteriaDrawsModule } from './loteria-draws/loteria-draws.module';
 import { LoteriaResultsModule } from './loteria-results/loteria-results.module';
 
-@Module({
-  imports: [
-    LoteriaDrawsModule,
-    LoteriaResultsModule
-  ],
-})
+@Module({ imports: [LoteriaResultsModule] })
 export class LoteriaLibModule {}

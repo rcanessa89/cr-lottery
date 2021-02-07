@@ -19,5 +19,8 @@ module.exports = {
     '<rootDir>/libs/product-resource-lib',
     '<rootDir>/apps/product-resource',
     '<rootDir>/apps/monolithic',
+    '<rootDir>/libs/draw-lib',
+    '<rootDir>/libs/models',
+    '<rootDir>/apps/draw',
   ],
 };

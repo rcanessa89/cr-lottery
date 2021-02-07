@@ -1,17 +1,8 @@
 import { PipeTransform, Injectable } from '@nestjs/common';
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  ID,
-  Int,
-  PartialType,
-  InputType,
-  Field,
-} from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ID, Int } from '@nestjs/graphql';
 
 import { pluralize } from '@cr-lottery/utils/pluralize';
+import { UpdateInputFactory } from '@cr-lottery/utils/update-input-factory';
 import { ResolverFactoryArgs } from './interfaces';
 import { FindOneArgs, FindAllArgs, RemoveResult } from './object-types';
 
@@ -21,19 +12,6 @@ class TransformBodyPipe implements PipeTransform {
     return JSON.parse(JSON.stringify(value));
   }
 }
-
-// eslint-disable-next-line
-const UpdateInputFactory = (Input, entityName: string): any => {
-  const updateInputName = `Update${entityName}Input`;
-
-  @InputType(updateInputName)
-  class UpdateInput extends PartialType(Input) {
-    @Field(() => ID)
-    id: number;
-  }
-
-  return UpdateInput;
-};
 
 export const resolverFactory = <T, CI, UI extends { id: number }>({
   Entity,
@@ -98,7 +76,7 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       )
       updateInput: UI
     ) {
-      return this.service.update(updateInput.id, updateInput);
+      return this.service.update(updateInput);
     }
 
     @Mutation(() => RemoveResult, { name: removeName })

@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { TiemposDrawsModule } from './tiempos-draws/tiempos-draws.module';
+import { TiemposResutsModule } from './tiempos-results/tiempos-results.module';
 
-@Module({
-  imports: [ TiemposDrawsModule ]
-})
+@Module({ imports: [TiemposResutsModule] })
 export class TiemposLibModule {}

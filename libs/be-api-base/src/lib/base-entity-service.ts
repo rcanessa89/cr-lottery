@@ -49,8 +49,6 @@ export abstract class BaseEntityService<T, CI, UI = Partial<CI>> {
   }
 
   public create(item: CI): Promise<T> {
-    console.log('create/item =>', item);
-
     return this.repository.save(item, this.options.create);
   }
 

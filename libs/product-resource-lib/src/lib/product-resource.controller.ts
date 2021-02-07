@@ -20,9 +20,14 @@ export class ProductResourceController {
     @Param('length') length = 2
   ) {
     const lengthNumber = Number(length);
-    const data = (
-      await this.productResourceHttpService.request(product, page, lengthNumber)
-    ).filter((d) => d.tipoSorteoCode);
+    const reqDataRes = await this.productResourceHttpService.request(
+      product,
+      page,
+      lengthNumber
+    );
+    const data = reqDataRes.filter(
+      (d) => d.tipoSorteoCode || d?.manana?.numeroSorteo
+    );
     const mappedData = data.map((p) =>
       this.productDrawMapper.mapByProduct(product, p)
     );

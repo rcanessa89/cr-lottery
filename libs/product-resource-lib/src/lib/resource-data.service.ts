@@ -12,12 +12,11 @@ export class ResourceDataService {
   }
 
   public async bulk(product: Product, values: ObjectLiteral[]) {
-    const { drawTable, relationTable, relation } = this.getEntityMetadata(
-      product
-    );
-    const relationValues = this.getRelationValues(relation, values);
+    const { relationTable } = this.getEntityMetadata(product);
+    const drawTable = 'draw';
+    const relationValues = this.getRelationValues(values);
     const relationColumns = this.getColumns(relationValues);
-    const drawValues = this.getDrawValues(relation, values);
+    const drawValues = this.getDrawValues(values);
 
     try {
       await this.connection
@@ -40,32 +39,25 @@ export class ResourceDataService {
     }
   }
 
-  private getDrawValues(
-    relation: string,
-    values: ObjectLiteral[]
-  ): ObjectLiteral[] {
+  private getDrawValues(values: ObjectLiteral[]): ObjectLiteral[] {
     return values.map((v) => {
       const copy = { ...v };
 
-      delete copy[relation];
+      delete copy.results;
 
       return copy;
     });
   }
 
-  private getRelationValues(
-    relation: string,
-    values: ObjectLiteral[]
-  ): ObjectLiteral[] {
-    return relation
-      ? values
-          .map((v) => {
-            const data: ObjectLiteral[] = v[relation];
+  private getRelationValues(values: ObjectLiteral[]): ObjectLiteral[] {
+    return values
+      .map((v) => {
+        const data: ObjectLiteral[] = v.results;
 
-            return [...data];
-          })
-          .flat()
-      : [];
+        return [...data];
+      })
+      .filter((v) => !!v)
+      .flat();
   }
 
   private getColumns(values: ObjectLiteral[]) {
@@ -74,9 +66,10 @@ export class ResourceDataService {
     }
 
     const columns = Object.keys(values[0]);
+    const drawColumIndex = columns.indexOf('draw');
 
-    if (columns.indexOf('draw') > -1) {
-      columns.push('draw.id');
+    if (drawColumIndex > -1) {
+      columns[drawColumIndex] = 'draw.id';
     }
 
     return columns;
@@ -86,37 +79,31 @@ export class ResourceDataService {
     switch (product) {
       case Product.CHANCES: {
         return {
-          drawTable: 'chances_draw',
           relationTable: 'chances_result',
-          relation: 'results',
         };
       }
 
       case Product.LOTERIA: {
         return {
-          drawTable: 'loteria_draw',
           relationTable: 'loteria_result',
-          relation: 'results',
         };
       }
 
       case Product.LOTTO: {
         return {
-          drawTable: 'lotto_draw',
-          relationTable: 'lotto_prize',
-          relation: 'prizes',
+          relationTable: 'lotto_result',
         };
       }
 
       case Product.MONAZOS: {
         return {
-          drawTable: 'monazos_draw',
+          relationTable: 'monazos_result',
         };
       }
 
       case Product.TIEMPOS: {
         return {
-          drawTable: 'tiempos_draw',
+          relationTable: 'tiempos_result',
         };
       }
     }

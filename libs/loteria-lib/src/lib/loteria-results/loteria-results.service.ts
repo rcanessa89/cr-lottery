@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { BaseEntityService } from '@cr-lottery/be-api-base/base-entity-service';
-import { LoteriaResult } from './loteria-result.entity';
-import { CreateLoteriaResultInput } from './create-loteria-result.input';
+import { LoteriaResult } from '@cr-lottery/models/loteria/loteria-result.entity';
+import { CreateLoteriaResultInput } from '@cr-lottery/models/loteria/create-loteria-result.input';
 
 @Injectable()
 export class LoteriaResultsService extends BaseEntityService<

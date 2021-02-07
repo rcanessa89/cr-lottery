@@ -8,6 +8,7 @@ import {
   DrawTime,
   NuevosTiemposProduct,
   Product,
+  ProductBase,
 } from '@cr-lottery/types';
 
 @Injectable()
@@ -38,11 +39,9 @@ export class ProductDrawMapper {
 
   public loteria(product: LoteriaNacionalProduct) {
     return {
-      id: product.numeroSorteo,
-      date: product.fecha,
-      validity: product.vigencia,
+      ...this.getDraw(product, Product.LOTERIA),
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
-        draw: product.numeroSorteo,
+        drawId: product.numeroSorteo,
         order: prize.orden,
         number: prize.numero,
         series: prize.serie,
@@ -53,11 +52,9 @@ export class ProductDrawMapper {
 
   public chances(product: LoteriaNacionalProduct) {
     return {
-      id: product.numeroSorteo,
-      date: product.fecha,
-      validity: product.vigencia,
+      ...this.getDraw(product, Product.CHANCES),
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
-        draw: product.numeroSorteo,
+        drawId: product.numeroSorteo,
         order: prize.orden,
         number: prize.numero,
         series: prize.serie,
@@ -68,24 +65,24 @@ export class ProductDrawMapper {
 
   public lotto(product: LottoProduct) {
     return {
-      id: product.numeroSorteo,
-      date: product.fecha,
-      validity: product.vigencia,
-      numbers: product.numeros.join(),
-      numbersRevenge: product.numerosRevancha.join(),
-      prizes: {
-        draw: product.numeroSorteo,
-        dosAciertos: product.premiosLotto.dosAciertos,
-        tresAciertos: product.premiosLotto.tresAciertos,
-        cuatroAciertos: product.premiosLotto.cuatroAciertos,
-        cincoAciertos: product.premiosLotto.cincoAciertos,
-        acumulado: product.premiosLotto.acumulado,
-        dosAciertosRevancha: product.premiosLotto.dosAciertosRevancha,
-        tresAciertosRevancha: product.premiosLotto.tresAciertosRevancha,
-        cuatroAciertosRevancha: product.premiosLotto.cuatroAciertosRevancha,
-        cincoAciertosRevancha: product.premiosLotto.cincoAciertosRevancha,
-        acumuladoRevancha: product.premiosLotto.acumuladoRevancha,
-      },
+      ...this.getDraw(product, Product.LOTTO),
+      results: [
+        {
+          numbers: product.numeros.join(),
+          numbersRevenge: product.numerosRevancha.join(),
+          drawId: product.numeroSorteo,
+          dosAciertos: product.premiosLotto.dosAciertos,
+          tresAciertos: product.premiosLotto.tresAciertos,
+          cuatroAciertos: product.premiosLotto.cuatroAciertos,
+          cincoAciertos: product.premiosLotto.cincoAciertos,
+          acumulado: product.premiosLotto.acumulado,
+          dosAciertosRevancha: product.premiosLotto.dosAciertosRevancha,
+          tresAciertosRevancha: product.premiosLotto.tresAciertosRevancha,
+          cuatroAciertosRevancha: product.premiosLotto.cuatroAciertosRevancha,
+          cincoAciertosRevancha: product.premiosLotto.cincoAciertosRevancha,
+          acumuladoRevancha: product.premiosLotto.acumuladoRevancha,
+        },
+      ],
     };
   }
 
@@ -94,21 +91,27 @@ export class ProductDrawMapper {
 
     if (product.manana) {
       data.push({
-        time: DrawTime.MORNING.toString(),
-        id: product.manana.numeroSorteo,
-        date: product.manana.fecha,
-        validity: product.manana.vigencia,
-        numbers: product.manana.numeros.join(),
+        ...this.getDraw(product.manana, Product.MONAZOS),
+        results: [
+          {
+            drawId: product.manana.numeroSorteo,
+            time: DrawTime.MORNING.toString(),
+            numbers: product.manana.numeros.join(),
+          },
+        ],
       });
     }
 
     if (product.tarde) {
       data.push({
-        time: DrawTime.AFTERNOON.toString(),
-        id: product.tarde.numeroSorteo,
-        date: product.tarde.fecha,
-        validity: product.tarde.vigencia,
-        numbers: product.tarde.numeros.join(),
+        ...this.getDraw(product.tarde, Product.MONAZOS),
+        results: [
+          {
+            drawId: product.tarde.numeroSorteo,
+            time: DrawTime.AFTERNOON.toString(),
+            numbers: product.tarde.numeros.join(),
+          },
+        ],
       });
     }
 
@@ -120,26 +123,41 @@ export class ProductDrawMapper {
 
     if (product.manana) {
       data.push({
-        time: DrawTime.MORNING.toString(),
-        id: product.manana.numeroSorteo,
-        date: product.manana.fecha,
-        validity: product.manana.vigencia,
-        number: product.manana.numero,
-        prize: product.manana.premio,
+        ...this.getDraw(product.manana, Product.TIEMPOS),
+        results: [
+          {
+            drawId: product.manana.numeroSorteo,
+            time: DrawTime.MORNING.toString(),
+            number: product.manana.numero,
+            prize: product.manana.premio,
+          },
+        ],
       });
     }
 
     if (product.tarde) {
       data.push({
-        time: DrawTime.AFTERNOON.toString(),
-        id: product.tarde.numeroSorteo,
-        date: product.tarde.fecha,
-        validity: product.tarde.vigencia,
-        number: product.tarde.numero,
-        prize: product.tarde.premio,
+        ...this.getDraw(product.tarde, Product.TIEMPOS),
+        results: [
+          {
+            drawId: product.tarde.numeroSorteo,
+            time: DrawTime.AFTERNOON.toString(),
+            number: product.tarde.numero,
+            prize: product.tarde.premio,
+          },
+        ],
       });
     }
 
     return data;
+  }
+
+  private getDraw(product: ProductBase, productType: Product) {
+    return {
+      id: product.numeroSorteo,
+      date: product.fecha,
+      validity: product.vigencia,
+      product: productType,
+    };
   }
 }

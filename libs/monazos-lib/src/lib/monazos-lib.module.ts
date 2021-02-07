@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { MonazosDrawsModule } from './monazos-draws/monazos-draws.module';
+import { MonazosResultsModule } from './monazos-results/monazos-results.module';
 
-@Module({
-  imports: [ MonazosDrawsModule ]
-})
+@Module({ imports: [MonazosResultsModule] })
 export class MonazosLibModule {}
