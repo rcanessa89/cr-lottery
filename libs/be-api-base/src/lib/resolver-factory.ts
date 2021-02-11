@@ -4,7 +4,8 @@ import { Resolver, Query, Mutation, Args, ID, Int } from '@nestjs/graphql';
 import { pluralize } from '@cr-lottery/utils/pluralize';
 import { UpdateInputFactory } from '@cr-lottery/utils/update-input-factory';
 import { ResolverFactoryArgs } from './interfaces';
-import { FindOneArgs, FindAllArgs, RemoveResult } from './object-types';
+import { RemoveResult } from './object-types';
+import { getFindArgsTypes } from './get-find-args-types';
 
 @Injectable()
 class TransformBodyPipe implements PipeTransform {
@@ -29,6 +30,7 @@ ResolverFactoryArgs<T, CI, UI>): any => {
   const countName = `count${entityName}`;
   const updateName = `update${entityName}`;
   const removeName = `remove${entityName}`;
+  const { FindOneOptions, FindAllOptions } = getFindArgsTypes(CreateInput);
 
   UpdateInput = UpdateInput || UpdateInputFactory(CreateInput, entityName);
 
@@ -41,12 +43,25 @@ ResolverFactoryArgs<T, CI, UI>): any => {
     }
 
     @Query(() => [Entity], { name: findAllName })
-    findAll(@Args(TransformBodyPipe) { options }: FindAllArgs): T[] {
+    findAll(
+      @Args(
+        {
+          name: `FindAll${pluralize(entityName)}Options`,
+          type: () => FindAllOptions,
+        },
+        TransformBodyPipe
+      )
+      options: number
+    ): T[] {
       return this.service.findAll(options);
     }
 
     @Query(() => Entity, { name: findOneName })
-    findOne(@Args() { id, options }: FindOneArgs): T {
+    findOne(
+      @Args({ name: 'id', type: () => Int }) id: number,
+      @Args({ name: `FindOne${entityName}Options`, type: () => FindOneOptions })
+      options
+    ): T {
       return this.service.findOne(id, options);
     }
 

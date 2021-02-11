@@ -1,9 +1,9 @@
-export enum DrawTime {
+export enum DrawTimeEnum {
   MORNING,
   AFTERNOON,
 }
 
-export enum Product {
+export enum ProductEnum {
   CHANCES = 'chances',
   LOTERIA = 'loterianacional',
   LOTTO = 'lotto',

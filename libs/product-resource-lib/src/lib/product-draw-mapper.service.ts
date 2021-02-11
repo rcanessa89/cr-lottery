@@ -15,23 +15,23 @@ import {
 export class ProductDrawMapper {
   public mapByProduct(product: Product, data) {
     switch (product) {
-      case Product.CHANCES: {
+      case Product.Chances: {
         return this.chances(data);
       }
 
-      case Product.LOTERIA: {
+      case Product.Loteria: {
         return this.loteria(data);
       }
 
-      case Product.LOTTO: {
+      case Product.Lotto: {
         return this.lotto(data);
       }
 
-      case Product.MONAZOS: {
+      case Product.Monazos: {
         return this.tresmonazos(data);
       }
 
-      case Product.TIEMPOS: {
+      case Product.Tiempos: {
         return this.tiempos(data);
       }
     }
@@ -39,7 +39,7 @@ export class ProductDrawMapper {
 
   public loteria(product: LoteriaNacionalProduct) {
     return {
-      ...this.getDraw(product, Product.LOTERIA),
+      ...this.getDraw(product, Product.Loteria),
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
         drawId: product.numeroSorteo,
         order: prize.orden,
@@ -52,7 +52,7 @@ export class ProductDrawMapper {
 
   public chances(product: LoteriaNacionalProduct) {
     return {
-      ...this.getDraw(product, Product.CHANCES),
+      ...this.getDraw(product, Product.Chances),
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
         drawId: product.numeroSorteo,
         order: prize.orden,
@@ -65,7 +65,7 @@ export class ProductDrawMapper {
 
   public lotto(product: LottoProduct) {
     return {
-      ...this.getDraw(product, Product.LOTTO),
+      ...this.getDraw(product, Product.Lotto),
       results: [
         {
           numbers: product.numeros.join(),
@@ -91,11 +91,11 @@ export class ProductDrawMapper {
 
     if (product.manana) {
       data.push({
-        ...this.getDraw(product.manana, Product.MONAZOS),
+        ...this.getDraw(product.manana, Product.Monazos),
         results: [
           {
             drawId: product.manana.numeroSorteo,
-            time: DrawTime.MORNING.toString(),
+            time: DrawTime.Morning.toString(),
             numbers: product.manana.numeros.join(),
           },
         ],
@@ -104,11 +104,11 @@ export class ProductDrawMapper {
 
     if (product.tarde) {
       data.push({
-        ...this.getDraw(product.tarde, Product.MONAZOS),
+        ...this.getDraw(product.tarde, Product.Monazos),
         results: [
           {
             drawId: product.tarde.numeroSorteo,
-            time: DrawTime.AFTERNOON.toString(),
+            time: DrawTime.Afternoon.toString(),
             numbers: product.tarde.numeros.join(),
           },
         ],
@@ -123,11 +123,11 @@ export class ProductDrawMapper {
 
     if (product.manana) {
       data.push({
-        ...this.getDraw(product.manana, Product.TIEMPOS),
+        ...this.getDraw(product.manana, Product.Tiempos),
         results: [
           {
             drawId: product.manana.numeroSorteo,
-            time: DrawTime.MORNING.toString(),
+            time: DrawTime.Morning.toString(),
             number: product.manana.numero,
             prize: product.manana.premio,
           },
@@ -137,11 +137,11 @@ export class ProductDrawMapper {
 
     if (product.tarde) {
       data.push({
-        ...this.getDraw(product.tarde, Product.TIEMPOS),
+        ...this.getDraw(product.tarde, Product.Tiempos),
         results: [
           {
             drawId: product.tarde.numeroSorteo,
-            time: DrawTime.AFTERNOON.toString(),
+            time: DrawTime.Afternoon.toString(),
             number: product.tarde.numero,
             prize: product.tarde.premio,
           },

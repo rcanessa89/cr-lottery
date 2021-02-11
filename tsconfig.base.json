@@ -27,7 +27,8 @@
         "libs/product-resource-lib/src/index.ts"
       ],
       "@cr-lottery/draw-lib": ["libs/draw-lib/src/index.ts"],
-      "@cr-lottery/models/*": ["libs/models/src//lib/*"]
+      "@cr-lottery/models/*": ["libs/models/src//lib/*"],
+      "@cr-lottery/react-hooks-lib": ["libs/react-hooks-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

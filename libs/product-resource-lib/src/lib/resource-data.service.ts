@@ -77,31 +77,31 @@ export class ResourceDataService {
 
   private getEntityMetadata(product: Product) {
     switch (product) {
-      case Product.CHANCES: {
+      case Product.Chances: {
         return {
           relationTable: 'chances_result',
         };
       }
 
-      case Product.LOTERIA: {
+      case Product.Loteria: {
         return {
           relationTable: 'loteria_result',
         };
       }
 
-      case Product.LOTTO: {
+      case Product.Lotto: {
         return {
           relationTable: 'lotto_result',
         };
       }
 
-      case Product.MONAZOS: {
+      case Product.Monazos: {
         return {
           relationTable: 'monazos_result',
         };
       }
 
-      case Product.TIEMPOS: {
+      case Product.Tiempos: {
         return {
           relationTable: 'tiempos_result',
         };

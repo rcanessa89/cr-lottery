@@ -1,14 +1,9 @@
 {
   "npmScope": "cr-lottery",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
@@ -17,65 +12,30 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "utils": {
-      "tags": []
-    },
-    "types": {
-      "tags": []
-    },
-    "be-api-base": {
-      "tags": []
-    },
-    "chances": {
-      "tags": []
-    },
-    "chances-lib": {
-      "tags": []
-    },
-    "loteria-lib": {
-      "tags": []
-    },
-    "loteria": {
-      "tags": []
-    },
-    "lotto-lib": {
-      "tags": []
-    },
-    "lotto": {
-      "tags": []
-    },
-    "monazos-lib": {
-      "tags": []
-    },
-    "monazos": {
-      "tags": []
-    },
-    "tiempos-lib": {
-      "tags": []
-    },
-    "tiempos": {
-      "tags": []
-    },
-    "product-resource-lib": {
-      "tags": []
-    },
-    "product-resource": {
-      "tags": []
-    },
-    "draw-lib": {
-      "tags": []
-    },
-    "models": {
-      "tags": []
-    },
-    "draw": {
-      "tags": []
-    }
+    "utils": { "tags": [] },
+    "types": { "tags": [] },
+    "be-api-base": { "tags": [] },
+    "chances": { "tags": [] },
+    "chances-lib": { "tags": [] },
+    "loteria-lib": { "tags": [] },
+    "loteria": { "tags": [] },
+    "lotto-lib": { "tags": [] },
+    "lotto": { "tags": [] },
+    "monazos-lib": { "tags": [] },
+    "monazos": { "tags": [] },
+    "tiempos-lib": { "tags": [] },
+    "tiempos": { "tags": [] },
+    "product-resource-lib": { "tags": [] },
+    "product-resource": { "tags": [] },
+    "draw-lib": { "tags": [] },
+    "models": { "tags": [] },
+    "draw": { "tags": [] },
+    "site": { "tags": [] },
+    "site-e2e": { "tags": [], "implicitDependencies": ["site"] },
+    "react-hooks-lib": { "tags": [] }
   }
 }

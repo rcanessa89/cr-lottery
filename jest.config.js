@@ -22,5 +22,8 @@ module.exports = {
     '<rootDir>/libs/draw-lib',
     '<rootDir>/libs/models',
     '<rootDir>/apps/draw',
+    '<rootDir>/apps/site',
+    '<rootDir>/libs/react-hooks',
+    '<rootDir>/libs/react-hooks-lib',
   ],
 };
