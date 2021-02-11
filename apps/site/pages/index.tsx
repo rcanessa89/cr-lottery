@@ -1,7 +1,7 @@
 import React from 'react';
 import { Between } from 'typeorm';
 
-import { QueryDrawsArgs } from '@cr-lottery/types';
+import { Product, QueryDrawsArgs } from '@cr-lottery/types';
 import { initializeApollo } from '@cr-lottery/utils/initialize-apollo';
 import { Home, DRAWS_QUERY, DrawsQueryResponse } from '../components/Home';
 import { ApolloProvider, useQuery } from '@apollo/client';
@@ -44,7 +44,7 @@ export const Index = () => {
   const apolloClient = initializeApollo();
   const date = new Date();
   const firstDay = new Date(
-    date.getFullYear(),
+    date.getFullYear() - 1,
     date.getMonth(),
     1
   ).toISOString();
@@ -53,13 +53,14 @@ export const Index = () => {
     date.getMonth() + 1,
     0
   ).toISOString();
+
+  console.log(Between(firstDay, lastDay));
+
   const x = useQuery<DrawsQueryResponse, QueryDrawsArgs>(DRAWS_QUERY, {
     client: apolloClient,
     variables: {
       FindAllDrawsOptions: {
-        where: {
-          product: 'Lotto',
-        },
+        where: `date > ${firstDay}`,
       },
     },
   });
