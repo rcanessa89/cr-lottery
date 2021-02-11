@@ -18,7 +18,7 @@ const resultTypes = {
 const typesMap = mapTypes<typeof resultTypes>(
   (c) => ({
     Decorator: ObjectType,
-    metadata: c.name.replace('Result', ''),
+    metadata: [c.name.replace('Result', '')],
   }),
   // eslint-disable-next-line
   (c) => OmitType(c, ['draw'] as any),

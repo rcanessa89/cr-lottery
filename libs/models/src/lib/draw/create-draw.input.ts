@@ -27,7 +27,7 @@ const drawResults = {
 const inputMap = mapTypes<typeof drawResults>(
   (c) => ({
     Decorator: InputType,
-    metadata: c.name,
+    metadata: [c.name.replace('Result', '').replace('Prize', '')],
   }),
   // eslint-disable-next-line
   (c) => OmitType(c, ['draw'] as any),

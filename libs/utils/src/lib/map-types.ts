@@ -5,8 +5,8 @@ export const mapTypes = <T>(
     c: { new (): unknown },
     k?: string
   ) => {
-    Decorator: (m: unknown) => ClassDecorator;
-    metadata: unknown;
+    Decorator: (m?: unknown) => ClassDecorator;
+    metadata: unknown[];
   },
   // eslint-disable-next-line
   mapFunction: (c: { new (): unknown }, k?: string) => any,
@@ -17,7 +17,7 @@ export const mapTypes = <T>(
   Object.entries(classes).forEach(([name, c]) => {
     const { Decorator, metadata } = decoratorFactory(c, name);
 
-    @Decorator(metadata)
+    @Decorator(...metadata)
     class MappedClass extends mapFunction(c, name) {}
 
     Object.defineProperty(MappedClass, 'name', {
