@@ -10,7 +10,11 @@ import { getFindArgsTypes } from './get-find-args-types';
 @Injectable()
 class TransformBodyPipe implements PipeTransform {
   transform(value) {
-    return JSON.parse(JSON.stringify(value));
+    try {
+      return JSON.parse(JSON.stringify(value));
+    } catch (e) {
+      return value;
+    }
   }
 }
 
@@ -60,11 +64,14 @@ ResolverFactoryArgs<T, CI, UI>): any => {
     @Query(() => Entity, { name: findOneName })
     findOne(
       @Args({ name: 'id', type: () => Int }) id: number,
-      @Args({
-        name: `FindOne${entityName}Options`,
-        type: () => FindOneOptions,
-        nullable: true,
-      })
+      @Args(
+        {
+          name: `FindOne${entityName}Options`,
+          type: () => FindOneOptions,
+          nullable: true,
+        },
+        TransformBodyPipe
+      )
       options
     ): T {
       return this.service.findOne(id, options);

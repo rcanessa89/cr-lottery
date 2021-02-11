@@ -55,6 +55,13 @@ export const Index = () => {
   ).toISOString();
   const x = useQuery<DrawsQueryResponse, QueryDrawsArgs>(DRAWS_QUERY, {
     client: apolloClient,
+    variables: {
+      FindAllDrawsOptions: {
+        where: {
+          product: 'Lotto',
+        },
+      },
+    },
   });
 
   console.log(x);
