@@ -23,27 +23,27 @@ const DRAW =
   'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/draw/graphql';
 const drawLink = new HttpLink({ uri: DRAW });
 const chancesLink = ApolloLink.split(
-  ({ getContext }) => getContext().clientType === Product.Chances,
+  ({ getContext }) => getContext()?.clientType === Product.Chances,
   new HttpLink({ uri: CHANCES }),
   drawLink
 );
 const loteriaLink = ApolloLink.split(
-  ({ getContext }) => getContext().clientType === Product.Loteria,
+  ({ getContext }) => getContext()?.clientType === Product.Loteria,
   new HttpLink({ uri: LOTERIA }),
   drawLink
 );
 const lottoLink = ApolloLink.split(
-  ({ getContext }) => getContext().clientType === Product.Lotto,
+  ({ getContext }) => getContext()?.clientType === Product.Lotto,
   new HttpLink({ uri: LOTTO }),
   drawLink
 );
 const monazosLink = ApolloLink.split(
-  ({ getContext }) => getContext().clientType === Product.Monazos,
+  ({ getContext }) => getContext()?.clientType === Product.Monazos,
   new HttpLink({ uri: MONAZOS }),
   drawLink
 );
 const tiemposLink = ApolloLink.split(
-  ({ getContext }) => getContext().clientType === Product.Tiempos,
+  ({ getContext }) => getContext()?.clientType === Product.Tiempos,
   new HttpLink({ uri: TIEMPOS }),
   drawLink
 );
@@ -53,13 +53,7 @@ const createApolloClient = () => {
 
   return new ApolloClient({
     ssrMode: typeof window === undefinedTypeOf,
-    link: ApolloLink.from([
-      chancesLink,
-      loteriaLink,
-      lottoLink,
-      monazosLink,
-      tiemposLink,
-    ]),
+    link: drawLink,
     cache: new InMemoryCache(),
   });
 };

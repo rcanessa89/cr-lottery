@@ -11,8 +11,8 @@ export const getFindArgsTypes = (Entity) => {
 
   @InputType(`FindOne${name}Options`)
   class FindOneOptions {
-    @Field(() => WhereType, {})
-    where: WhereType;
+    @Field(() => WhereType, { nullable: true })
+    where?: WhereType;
 
     @Field(() => [String], { nullable: true })
     relations?: string[];

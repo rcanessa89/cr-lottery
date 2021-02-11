@@ -48,10 +48,11 @@ ResolverFactoryArgs<T, CI, UI>): any => {
         {
           name: `FindAll${pluralize(entityName)}Options`,
           type: () => FindAllOptions,
+          nullable: true,
         },
         TransformBodyPipe
       )
-      options: number
+      options?
     ): T[] {
       return this.service.findAll(options);
     }
@@ -59,7 +60,11 @@ ResolverFactoryArgs<T, CI, UI>): any => {
     @Query(() => Entity, { name: findOneName })
     findOne(
       @Args({ name: 'id', type: () => Int }) id: number,
-      @Args({ name: `FindOne${entityName}Options`, type: () => FindOneOptions })
+      @Args({
+        name: `FindOne${entityName}Options`,
+        type: () => FindOneOptions,
+        nullable: true,
+      })
       options
     ): T {
       return this.service.findOne(id, options);
