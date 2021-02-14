@@ -19,13 +19,13 @@ export class VpcStack extends Stack {
           name: 'publicSubnet',
           subnetType: SubnetType.PUBLIC,
         },
-        {
-          cidrMask: 24,
-          name: 'privateSubnet',
-          subnetType: SubnetType.PRIVATE,
-        },
+        // {
+        //   cidrMask: 24,
+        //   name: 'privateSubnet',
+        //   subnetType: SubnetType.PRIVATE,
+        // },
       ],
-      natGateways: 1,
+      natGateways: 0,
     });
 
     new CfnOutput(this, 'publicSubnetId', {
@@ -33,9 +33,9 @@ export class VpcStack extends Stack {
       exportName: scope.logicalPrefixedName('publicSubnetId'),
     });
 
-    new CfnOutput(this, 'privateSubnetId', {
-      value: this.vpc.privateSubnets[0].subnetId,
-      exportName: scope.logicalPrefixedName('privateSubnetId'),
-    });
+    // new CfnOutput(this, 'privateSubnetId', {
+    //   value: this.vpc.privateSubnets[0].subnetId,
+    //   exportName: scope.logicalPrefixedName('privateSubnetId'),
+    // });
   }
 }

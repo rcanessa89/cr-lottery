@@ -18,7 +18,6 @@
   "projects": {
     "utils": { "tags": [] },
     "types": { "tags": [] },
-    "be-api-base": { "tags": [] },
     "chances": { "tags": [] },
     "chances-lib": { "tags": [] },
     "loteria-lib": { "tags": [] },
@@ -36,6 +35,7 @@
     "draw": { "tags": [] },
     "site": { "tags": [] },
     "site-e2e": { "tags": [], "implicitDependencies": ["site"] },
-    "react-hooks-lib": { "tags": [] }
+    "react-hooks-lib": { "tags": [] },
+    "gql-base": { "tags": [] }
   }
 }

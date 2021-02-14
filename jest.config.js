@@ -3,7 +3,6 @@ module.exports = {
     '<rootDir>/apps/be-todos',
     '<rootDir>/libs/utils',
     '<rootDir>/libs/types',
-    '<rootDir>/libs/be-api-base',
     '<rootDir>/libs/be-todos',
     '<rootDir>/libs/be-todos-lib',
     '<rootDir>/apps/chances',
@@ -25,5 +24,6 @@ module.exports = {
     '<rootDir>/apps/site',
     '<rootDir>/libs/react-hooks',
     '<rootDir>/libs/react-hooks-lib',
+    '<rootDir>/libs/gql-base',
   ],
 };

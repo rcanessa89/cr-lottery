@@ -18,17 +18,16 @@ export abstract class BaseEntityService<T, CI, UI = Partial<CI>> {
   ) {
     this.repository = repository;
     this.options = {
-      create: {},
-      findAll: {},
-      findOne: {},
+      create: (o) => o,
+      findAll: (o) => o,
+      findOne: (o) => o,
       ...options,
     };
   }
 
   public findAll(options: FindManyOptions<T> = {}): Promise<T[]> {
     return this.repository.find({
-      ...this.options.findAll,
-      ...options,
+      ...this.options.findAll(options),
     });
   }
 
@@ -43,13 +42,12 @@ export abstract class BaseEntityService<T, CI, UI = Partial<CI>> {
     }
 
     return this.repository.findOne(parsedId, {
-      ...this.options.findOne,
-      ...options,
+      ...this.options.findOne(options),
     });
   }
 
   public create(item: CI): Promise<T> {
-    return this.repository.save(item, this.options.create);
+    return this.repository.save(item, this.options.create({}));
   }
 
   public async update(item: UI): Promise<T> {

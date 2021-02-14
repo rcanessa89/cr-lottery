@@ -1,6 +1,6 @@
 import { Resolver } from '@nestjs/graphql';
 
-import { resolverFactory } from '@cr-lottery/be-api-base/resolver-factory';
+import { resolverFactory } from '@cr-lottery/gql-base';
 import { TiemposResult } from '@cr-lottery/models/tiempos/tiempos-result.entity';
 import { CreateTiemposResultInput } from '@cr-lottery/models/tiempos/create-tiempos-result.input';
 import { TiemposResultsService } from './tiempos-results.service';

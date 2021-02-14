@@ -5,3 +5,7 @@ export interface DrawsQueryResponse {
   date: string;
   product: Product;
 }
+
+export interface HomeProps {
+  draws: DrawsQueryResponse[];
+}

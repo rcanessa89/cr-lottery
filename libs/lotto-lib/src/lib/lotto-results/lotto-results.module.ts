@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { getDBEntities } from '@cr-lottery/be-api-base/base-type-orm-config';
+import { getDBEntities } from '@cr-lottery/models/utils/get-db-entities';
 import { LottoResultsResolver } from './lotto-results.resolver';
 import { LottoResultsService } from './lotto-results.service';
 

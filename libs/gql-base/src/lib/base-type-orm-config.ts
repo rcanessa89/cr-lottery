@@ -3,23 +3,8 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { envValues } from '@cr-lottery/utils/env-values';
 import { isProd } from '@cr-lottery/utils/is-prod';
 import { ObjectLiteral } from '@cr-lottery/types';
-import { Draw } from '@cr-lottery/models/draw/draw.entity';
-import { LoteriaResult } from '@cr-lottery/models/loteria/loteria-result.entity';
-import { ChancesResult } from '@cr-lottery/models/chances/chances-result.entity';
-import { LottoResult } from '@cr-lottery/models/lotto/lotto-result.entity';
-import { MonazosResult } from '@cr-lottery/models/monazos/monazos-result.entity';
-import { TiemposResult } from '@cr-lottery/models/tiempos/tiempos-result.entity';
 
 const isProdStage = isProd();
-
-export const dbEntities = {
-  Draw,
-  LoteriaResult,
-  ChancesResult,
-  LottoResult,
-  MonazosResult,
-  TiemposResult,
-};
 
 /**
  * Set the base configuration of the TypeORM module configuration
@@ -47,6 +32,7 @@ export const baseTypeOrmConfig = (
 
   try {
     config = JSON.parse(envValues.dbSecret);
+
     config.type = config.engine;
     config.database = config.dbname;
   } catch {
@@ -60,12 +46,4 @@ export const baseTypeOrmConfig = (
   };
 
   return baseConfig as TypeOrmModuleOptions;
-};
-
-export const getDBEntities = (
-  config: { [key in keyof typeof dbEntities]?: boolean } = {}
-) => {
-  return Object.entries(dbEntities)
-    .filter(([k]) => config[k] !== false)
-    .map(([, v]) => v);
 };

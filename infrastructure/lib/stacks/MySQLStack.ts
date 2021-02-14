@@ -6,7 +6,7 @@ import {
   Vpc,
   SubnetType,
   Peer,
-  Port
+  Port,
 } from '@aws-cdk/aws-ec2';
 import {
   DatabaseInstance,
@@ -15,6 +15,8 @@ import {
   StorageType,
 } from '@aws-cdk/aws-rds';
 import { CfnOutput } from '@aws-cdk/core';
+
+import { DB_NAME } from '../constants';
 
 export interface MySQLStackProps extends StackProps {
   vpc: Vpc;
@@ -26,9 +28,11 @@ export class MySQLStack extends Stack {
   constructor(scope: App, id: string, props: MySQLStackProps) {
     super(scope, id, props);
 
+    const stage = process.env.STAGE as string;
+
     this.mySQLRDSInstance = new DatabaseInstance(this, 'mysqlInstance', {
       engine: DatabaseInstanceEngine.mysql({
-        version: MysqlEngineVersion.VER_8_0_20
+        version: MysqlEngineVersion.VER_8_0_20,
       }),
       vpc: props.vpc,
       instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.MICRO),
@@ -37,26 +41,27 @@ export class MySQLStack extends Stack {
       vpcSubnets: { subnetType: SubnetType.PUBLIC },
       multiAz: false,
       deletionProtection: false,
-      databaseName: process.env.DB_NAME
+      databaseName: `${DB_NAME}${
+        stage.charAt(0).toUpperCase() + stage.slice(1)
+      }`,
     });
 
-    this.mySQLRDSInstance.connections.securityGroups[0].addIngressRule(Peer.ipv4('0.0.0.0/0'), Port.tcp(3306));
+    this.mySQLRDSInstance.connections.securityGroups[0].addIngressRule(
+      Peer.ipv4('0.0.0.0/0'),
+      Port.tcp(3306)
+    );
 
     if (this.mySQLRDSInstance.secret?.secretValue) {
       new CfnOutput(this, 'dbSecret', {
         value: `${this.mySQLRDSInstance.secret.secretValue.toString()}`,
-        exportName: scope.logicalPrefixedName('dbSecret')
+        exportName: scope.logicalPrefixedName('dbSecret'),
       });
     }
 
     new CfnOutput(this, 'securityGroupId', {
-      value: this.mySQLRDSInstance.connections.securityGroups[0].securityGroupId,
-      exportName: scope.logicalPrefixedName('securityGroupId')
-    });
-
-    new CfnOutput(this, 'subnetId', {
-      value: this.mySQLRDSInstance.vpc.publicSubnets[0].subnetId,
-      exportName: scope.logicalPrefixedName('subnetId')
+      value: this.mySQLRDSInstance.connections.securityGroups[0]
+        .securityGroupId,
+      exportName: scope.logicalPrefixedName('securityGroupId'),
     });
   }
 }

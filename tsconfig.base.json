@@ -17,7 +17,6 @@
     "paths": {
       "@cr-lottery/utils/*": ["libs/utils/src/lib/*"],
       "@cr-lottery/types": ["libs/types/src/index.ts"],
-      "@cr-lottery/be-api-base/*": ["libs/be-api-base/src/lib/*"],
       "@cr-lottery/chances-lib": ["libs/chances-lib/src/index.ts"],
       "@cr-lottery/loteria-lib": ["libs/loteria-lib/src/index.ts"],
       "@cr-lottery/lotto-lib": ["libs/lotto-lib/src/index.ts"],
@@ -28,7 +27,8 @@
       ],
       "@cr-lottery/draw-lib": ["libs/draw-lib/src/index.ts"],
       "@cr-lottery/models/*": ["libs/models/src//lib/*"],
-      "@cr-lottery/react-hooks-lib": ["libs/react-hooks-lib/src/index.ts"]
+      "@cr-lottery/react-hooks-lib": ["libs/react-hooks-lib/src/index.ts"],
+      "@cr-lottery/gql-base": ["libs/gql-base/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

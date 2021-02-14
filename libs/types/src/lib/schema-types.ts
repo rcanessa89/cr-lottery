@@ -40,7 +40,7 @@ export type ChancesResult = {
   draw: Draw;
 };
 
-export type ChancesResultWhere = {
+export type ChancesResultOptionsWhere = {
   order?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
   series?: Maybe<Scalars['Float']>;
@@ -149,12 +149,7 @@ export type Draw = {
   results?: Maybe<Array<Results>>;
 };
 
-export enum DrawTime {
-  Morning = 'Morning',
-  Afternoon = 'Afternoon',
-}
-
-export type DrawWhere = {
+export type DrawOptionsWhere = {
   id?: Maybe<Scalars['ID']>;
   date?: Maybe<Scalars['DateTime']>;
   validity?: Maybe<Scalars['DateTime']>;
@@ -166,72 +161,77 @@ export type DrawWhere = {
   tiemposResults?: Maybe<Array<CreateTiemposInput>>;
 };
 
-export type FindAllChancesResultsOptions = {
-  where: ChancesResultWhere;
+export enum DrawTime {
+  Morning = 'Morning',
+  Afternoon = 'Afternoon',
+}
+
+export type FindAllChancesResultOptions = {
+  where?: Maybe<ChancesResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
   skip?: Maybe<Scalars['Float']>;
   take?: Maybe<Scalars['Float']>;
 };
 
-export type FindAllDrawsOptions = {
-  where: DrawWhere;
+export type FindAllDrawOptions = {
+  where?: Maybe<DrawOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
   skip?: Maybe<Scalars['Float']>;
   take?: Maybe<Scalars['Float']>;
 };
 
-export type FindAllLoteriaResultsOptions = {
-  where: LoteriaResultWhere;
+export type FindAllLoteriaResultOptions = {
+  where?: Maybe<LoteriaResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
   skip?: Maybe<Scalars['Float']>;
   take?: Maybe<Scalars['Float']>;
 };
 
-export type FindAllLottoPrizesOptions = {
-  where: LottoPrizeWhere;
+export type FindAllLottoPrizeOptions = {
+  where?: Maybe<LottoPrizeOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
   skip?: Maybe<Scalars['Float']>;
   take?: Maybe<Scalars['Float']>;
 };
 
-export type FindAllMonazosResultsOptions = {
-  where: MonazosResultWhere;
+export type FindAllMonazosResultOptions = {
+  where?: Maybe<MonazosResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
   skip?: Maybe<Scalars['Float']>;
   take?: Maybe<Scalars['Float']>;
 };
 
-export type FindOneChancesResultOptions = {
-  where: ChancesResultWhere;
+export type FindOneChancesResultOptionsOptions = {
+  where?: Maybe<ChancesResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
 };
 
-export type FindOneDrawOptions = {
-  where: DrawWhere;
+export type FindOneDrawOptionsOptions = {
+  where?: Maybe<DrawOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
 };
 
-export type FindOneLoteriaResultOptions = {
-  where: LoteriaResultWhere;
+export type FindOneLoteriaResultOptionsOptions = {
+  where?: Maybe<LoteriaResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
 };
 
-export type FindOneLottoPrizeOptions = {
-  where: LottoPrizeWhere;
+export type FindOneLottoPrizeOptionsOptions = {
+  where?: Maybe<LottoPrizeOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
 };
 
-export type FindOneMonazosResultOptions = {
-  where: MonazosResultWhere;
+export type FindOneMonazosResultOptionsOptions = {
+  where?: Maybe<MonazosResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
 };
@@ -264,7 +264,7 @@ export type LoteriaResult = {
   draw: Draw;
 };
 
-export type LoteriaResultWhere = {
+export type LoteriaResultOptionsWhere = {
   order?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
   series?: Maybe<Scalars['Float']>;
@@ -291,7 +291,7 @@ export type Lotto = {
   acumuladoRevancha: Scalars['Float'];
 };
 
-export type LottoPrizeWhere = {
+export type LottoPrizeOptionsWhere = {
   numbers?: Maybe<Array<Scalars['Int']>>;
   numbersRevenge?: Maybe<Array<Scalars['Int']>>;
   dosAciertos?: Maybe<Scalars['Float']>;
@@ -346,7 +346,7 @@ export type MonazosResult = {
   draw: Draw;
 };
 
-export type MonazosResultWhere = {
+export type MonazosResultOptionsWhere = {
   time?: Maybe<DrawTime>;
   numbers?: Maybe<Array<Scalars['Int']>>;
   draw?: Maybe<Scalars['Float']>;
@@ -459,47 +459,47 @@ export type Query = {
 };
 
 export type QueryChancesResultsArgs = {
-  FindAllChancesResultsOptions: FindAllChancesResultsOptions;
+  FindAllOptions?: Maybe<FindAllChancesResultOptions>;
 };
 
 export type QueryChancesResultArgs = {
-  FindOneChancesResultOptions: FindOneChancesResultOptions;
+  FindOneOptions?: Maybe<FindOneChancesResultOptionsOptions>;
   id: Scalars['Int'];
 };
 
 export type QueryLoteriaResultsArgs = {
-  FindAllLoteriaResultsOptions: FindAllLoteriaResultsOptions;
+  FindAllOptions?: Maybe<FindAllLoteriaResultOptions>;
 };
 
 export type QueryLoteriaResultArgs = {
-  FindOneLoteriaResultOptions: FindOneLoteriaResultOptions;
+  FindOneOptions?: Maybe<FindOneLoteriaResultOptionsOptions>;
   id: Scalars['Int'];
 };
 
 export type QueryLottoResultsArgs = {
-  FindAllLottoResultsOptions: FindAllLottoPrizesOptions;
+  FindAllOptions?: Maybe<FindAllLottoPrizeOptions>;
 };
 
 export type QueryLottoResultArgs = {
-  FindOneLottoResultOptions: FindOneLottoPrizeOptions;
+  FindOneOptions?: Maybe<FindOneLottoPrizeOptionsOptions>;
   id: Scalars['Int'];
 };
 
 export type QueryMonazosResultsArgs = {
-  FindAllMonazosResultsOptions: FindAllMonazosResultsOptions;
+  FindAllOptions?: Maybe<FindAllMonazosResultOptions>;
 };
 
 export type QueryMonazosResultArgs = {
-  FindOneMonazosResultOptions: FindOneMonazosResultOptions;
+  FindOneOptions?: Maybe<FindOneMonazosResultOptionsOptions>;
   id: Scalars['Int'];
 };
 
 export type QueryDrawsArgs = {
-  FindAllDrawsOptions: FindAllDrawsOptions;
+  FindAllOptions?: Maybe<FindAllDrawOptions>;
 };
 
 export type QueryDrawArgs = {
-  FindOneDrawOptions: FindOneDrawOptions;
+  FindOneOptions?: Maybe<FindOneDrawOptionsOptions>;
   id: Scalars['Int'];
 };
 

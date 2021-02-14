@@ -1,6 +1,6 @@
 import { Resolver } from '@nestjs/graphql';
 
-import { resolverFactory } from '@cr-lottery/be-api-base/resolver-factory';
+import { resolverFactory } from '@cr-lottery/gql-base';
 import { LottoResult } from '@cr-lottery/models/lotto/lotto-result.entity';
 import { CreateLottoPrizeInput } from '@cr-lottery/models/lotto/create-lotto-result.input';
 import { LottoResultsService } from './lotto-results.service';

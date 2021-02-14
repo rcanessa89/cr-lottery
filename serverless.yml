@@ -44,7 +44,6 @@ provider:
       - !ImportValue '${self:custom.sstApp}-securityGroupId'
     subnetIds:
       - !ImportValue '${self:custom.sstApp}-publicSubnetId'
-      - !ImportValue '${self:custom.sstApp}-privateSubnetId'
   apiGateway:
     shouldStartNameWithService: true
   iamRoleStatements:
@@ -102,5 +101,9 @@ functions:
     events:
       - http:
           path: /product-resource/seed/{product}/{page}/{length}
+          method: get
+          cors: true
+      - http:
+          path: /product-resource/gen-types
           method: get
           cors: true

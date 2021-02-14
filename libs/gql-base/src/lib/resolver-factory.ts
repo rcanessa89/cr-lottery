@@ -1,22 +1,16 @@
-import { PipeTransform, Injectable } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, ID, Int } from '@nestjs/graphql';
 
 import { pluralize } from '@cr-lottery/utils/pluralize';
-import { UpdateInputFactory } from '@cr-lottery/utils/update-input-factory';
 import { ResolverFactoryArgs } from './interfaces';
 import { RemoveResult } from './object-types';
-import { getFindArgsTypes } from './get-find-args-types';
-
-@Injectable()
-class TransformBodyPipe implements PipeTransform {
-  transform(value) {
-    try {
-      return JSON.parse(JSON.stringify(value));
-    } catch (e) {
-      return value;
-    }
-  }
-}
+import { TransformBodyPipe } from './transform-body.pipe';
+import {
+  getFindOneOptions,
+  getFindAllOptions,
+  getNames,
+  lowerFirstLetter,
+  UpdateInputFactory,
+} from './utils';
 
 export const resolverFactory = <T, CI, UI extends { id: number }>({
   Entity,
@@ -24,19 +18,11 @@ export const resolverFactory = <T, CI, UI extends { id: number }>({
   UpdateInput,
 }: // eslint-disable-next-line
 ResolverFactoryArgs<T, CI, UI>): any => {
-  const lowerFirstLetter = (s): string => {
-    return s[0].toLowerCase() + s.slice(1);
-  };
-  const entityName = Entity.name;
-  const createName = `create${entityName}`;
-  const findAllName = lowerFirstLetter(pluralize(entityName));
-  const findOneName = lowerFirstLetter(entityName);
-  const countName = `count${entityName}`;
-  const updateName = `update${entityName}`;
-  const removeName = `remove${entityName}`;
-  const { FindOneOptions, FindAllOptions } = getFindArgsTypes(CreateInput);
+  const names = getNames(Entity);
+  const FindOneOptions = getFindOneOptions(CreateInput);
+  const FindAllOptions = getFindAllOptions(CreateInput, FindOneOptions);
 
-  UpdateInput = UpdateInput || UpdateInputFactory(CreateInput, entityName);
+  UpdateInput = UpdateInput || UpdateInputFactory(CreateInput, names.entity);
 
   @Resolver(() => Entity)
   class BaseResolver {
@@ -46,11 +32,11 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       this.service = service;
     }
 
-    @Query(() => [Entity], { name: findAllName })
+    @Query(() => [Entity], { name: names.findAll })
     findAll(
       @Args(
         {
-          name: `FindAll${pluralize(entityName)}Options`,
+          name: FindAllOptions.name,
           type: () => FindAllOptions,
           nullable: true,
         },
@@ -61,12 +47,12 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       return this.service.findAll(options);
     }
 
-    @Query(() => Entity, { name: findOneName })
+    @Query(() => Entity, { name: names.findOne })
     findOne(
       @Args({ name: 'id', type: () => Int }) id: number,
       @Args(
         {
-          name: `FindOne${entityName}Options`,
+          name: FindOneOptions.name,
           type: () => FindOneOptions,
           nullable: true,
         },
@@ -77,12 +63,12 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       return this.service.findOne(id, options);
     }
 
-    @Query(() => Int, { name: countName })
+    @Query(() => Int, { name: names.count })
     count(): number {
       return this.service.count();
     }
 
-    @Mutation(() => Entity, { name: createName })
+    @Mutation(() => Entity, { name: names.create })
     create(
       @Args(
         lowerFirstLetter(CreateInput.name),
@@ -94,7 +80,7 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       return this.service.create(createInput);
     }
 
-    @Mutation(() => Entity, { name: updateName })
+    @Mutation(() => Entity, { name: names.update })
     update(
       @Args(
         lowerFirstLetter(UpdateInput.name),
@@ -106,7 +92,7 @@ ResolverFactoryArgs<T, CI, UI>): any => {
       return this.service.update(updateInput);
     }
 
-    @Mutation(() => RemoveResult, { name: removeName })
+    @Mutation(() => RemoveResult, { name: names.remove })
     remove(@Args('id', { type: () => ID }, TransformBodyPipe) id: number) {
       return this.service.remove(id);
     }

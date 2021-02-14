@@ -1,1 +1,1 @@
-export * from './lib/react-hooks-lib';
+export * from './lib/use-apollo';

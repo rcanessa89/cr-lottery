@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { BaseEntityService } from '@cr-lottery/be-api-base/base-entity-service';
+import { BaseEntityService } from '@cr-lottery/gql-base';
 import { ChancesResult } from '@cr-lottery/models/chances/chances-result.entity';
 import { CreateChancesResultInput } from '@cr-lottery/models/chances/create-chances-result.input';
 

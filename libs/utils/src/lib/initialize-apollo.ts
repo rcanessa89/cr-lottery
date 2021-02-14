@@ -8,19 +8,16 @@ import {
 
 import { Product } from '@cr-lottery/types';
 
+const baseUri = 'https://dxa2mi3m43.execute-api.us-east-1.amazonaws.com/dev';
+const getUri = (name: string): string => `${baseUri}/${name}/graphql`;
+
 let apolloClient: ApolloClient<NormalizedCacheObject> = null;
-const CHANCES =
-  'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/chances/graphql';
-const LOTERIA =
-  'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/loteria/graphql';
-const LOTTO =
-  'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/lotto/graphql';
-const MONAZOS =
-  'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/monazos/graphql';
-const TIEMPOS =
-  'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/tiempos/graphql';
-const DRAW =
-  'https://8budx7h3mb.execute-api.us-east-1.amazonaws.com/dev/draw/graphql';
+const CHANCES = getUri('chances');
+const LOTERIA = getUri('loteria');
+const LOTTO = getUri('lotto');
+const MONAZOS = getUri('monazos');
+const TIEMPOS = getUri('tiempos');
+const DRAW = getUri('draw');
 const drawLink = new HttpLink({ uri: DRAW });
 const chancesLink = ApolloLink.split(
   ({ getContext }) => getContext()?.clientType === Product.Chances,
@@ -53,7 +50,13 @@ const createApolloClient = () => {
 
   return new ApolloClient({
     ssrMode: typeof window === undefinedTypeOf,
-    link: drawLink,
+    link: ApolloLink.from([
+      chancesLink,
+      loteriaLink,
+      lottoLink,
+      monazosLink,
+      tiemposLink,
+    ]),
     cache: new InMemoryCache(),
   });
 };
