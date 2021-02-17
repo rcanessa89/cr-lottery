@@ -12,7 +12,7 @@ import { ProductResourceHttpService } from './product-resource-http.service';
 import { ResourceDataService } from './resource-data.service';
 import { ChancesResultsResolver } from '@cr-lottery/chances-lib';
 import { LoteriaResultsResolver } from '@cr-lottery/loteria-lib';
-import { TiemposLibModule } from '@cr-lottery/tiempos-lib';
+import { TiemposResultsResolver } from '@cr-lottery/tiempos-lib';
 import { LottoResultsResolver } from '@cr-lottery/lotto-lib';
 import { MonazosResultsResolver } from '@cr-lottery/monazos-lib';
 import { DrawsResolver } from '@cr-lottery/draw-lib';
@@ -34,7 +34,7 @@ export class ProductResourceController {
     const schema = await gqlSchemaFactory.create([
       ChancesResultsResolver,
       LoteriaResultsResolver,
-      TiemposLibModule,
+      TiemposResultsResolver,
       LottoResultsResolver,
       MonazosResultsResolver,
       DrawsResolver,
@@ -68,6 +68,6 @@ export class ProductResourceController {
 
     await this.resourceDataService.bulk(product, bulkData);
 
-    return { saved: bulkData };
+    return 'done! ' + page;
   }
 }

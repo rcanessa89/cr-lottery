@@ -5,33 +5,33 @@ import {
   LoteriaChancesPrize,
   LottoProduct,
   TresMonazosProduct,
-  DrawTime,
+  DrawTimeEnum,
   NuevosTiemposProduct,
-  Product,
+  ProductEnum,
   ProductBase,
 } from '@cr-lottery/types';
 
 @Injectable()
 export class ProductDrawMapper {
-  public mapByProduct(product: Product, data) {
+  public mapByProduct(product: ProductEnum, data) {
     switch (product) {
-      case Product.Chances: {
+      case ProductEnum.CHANCES: {
         return this.chances(data);
       }
 
-      case Product.Loteria: {
+      case ProductEnum.LOTERIA: {
         return this.loteria(data);
       }
 
-      case Product.Lotto: {
+      case ProductEnum.LOTTO: {
         return this.lotto(data);
       }
 
-      case Product.Monazos: {
+      case ProductEnum.MONAZOS: {
         return this.tresmonazos(data);
       }
 
-      case Product.Tiempos: {
+      case ProductEnum.TIEMPOS: {
         return this.tiempos(data);
       }
     }
@@ -39,9 +39,9 @@ export class ProductDrawMapper {
 
   public loteria(product: LoteriaNacionalProduct) {
     return {
-      ...this.getDraw(product, Product.Loteria),
+      ...this.getDraw(product, ProductEnum.LOTERIA),
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
-        drawId: product.numeroSorteo,
+        draw: product.numeroSorteo,
         order: prize.orden,
         number: prize.numero,
         series: prize.serie,
@@ -52,9 +52,9 @@ export class ProductDrawMapper {
 
   public chances(product: LoteriaNacionalProduct) {
     return {
-      ...this.getDraw(product, Product.Chances),
+      ...this.getDraw(product, ProductEnum.CHANCES),
       results: product.premios.map((prize: LoteriaChancesPrize) => ({
-        drawId: product.numeroSorteo,
+        draw: product.numeroSorteo,
         order: prize.orden,
         number: prize.numero,
         series: prize.serie,
@@ -65,12 +65,12 @@ export class ProductDrawMapper {
 
   public lotto(product: LottoProduct) {
     return {
-      ...this.getDraw(product, Product.Lotto),
+      ...this.getDraw(product, ProductEnum.LOTTO),
       results: [
         {
           numbers: product.numeros.join(),
           numbersRevenge: product.numerosRevancha.join(),
-          drawId: product.numeroSorteo,
+          draw: product.numeroSorteo,
           dosAciertos: product.premiosLotto.dosAciertos,
           tresAciertos: product.premiosLotto.tresAciertos,
           cuatroAciertos: product.premiosLotto.cuatroAciertos,
@@ -91,11 +91,11 @@ export class ProductDrawMapper {
 
     if (product.manana) {
       data.push({
-        ...this.getDraw(product.manana, Product.Monazos),
+        ...this.getDraw(product.manana, ProductEnum.MONAZOS),
         results: [
           {
-            drawId: product.manana.numeroSorteo,
-            time: DrawTime.Morning.toString(),
+            draw: product.manana.numeroSorteo,
+            time: DrawTimeEnum.MORNING.toString(),
             numbers: product.manana.numeros.join(),
           },
         ],
@@ -104,11 +104,11 @@ export class ProductDrawMapper {
 
     if (product.tarde) {
       data.push({
-        ...this.getDraw(product.tarde, Product.Monazos),
+        ...this.getDraw(product.tarde, ProductEnum.MONAZOS),
         results: [
           {
-            drawId: product.tarde.numeroSorteo,
-            time: DrawTime.Afternoon.toString(),
+            draw: product.tarde.numeroSorteo,
+            time: DrawTimeEnum.AFTERNOON.toString(),
             numbers: product.tarde.numeros.join(),
           },
         ],
@@ -123,11 +123,11 @@ export class ProductDrawMapper {
 
     if (product.manana) {
       data.push({
-        ...this.getDraw(product.manana, Product.Tiempos),
+        ...this.getDraw(product.manana, ProductEnum.TIEMPOS),
         results: [
           {
-            drawId: product.manana.numeroSorteo,
-            time: DrawTime.Morning.toString(),
+            draw: product.manana.numeroSorteo,
+            time: DrawTimeEnum.MORNING.toString(),
             number: product.manana.numero,
             prize: product.manana.premio,
           },
@@ -137,11 +137,11 @@ export class ProductDrawMapper {
 
     if (product.tarde) {
       data.push({
-        ...this.getDraw(product.tarde, Product.Tiempos),
+        ...this.getDraw(product.tarde, ProductEnum.TIEMPOS),
         results: [
           {
-            drawId: product.tarde.numeroSorteo,
-            time: DrawTime.Afternoon.toString(),
+            draw: product.tarde.numeroSorteo,
+            time: DrawTimeEnum.AFTERNOON.toString(),
             number: product.tarde.numero,
             prize: product.tarde.premio,
           },
@@ -152,7 +152,7 @@ export class ProductDrawMapper {
     return data;
   }
 
-  private getDraw(product: ProductBase, productType: Product) {
+  private getDraw(product: ProductBase, productType: ProductEnum) {
     return {
       id: product.numeroSorteo,
       date: product.fecha,

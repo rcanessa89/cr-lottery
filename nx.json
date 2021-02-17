@@ -36,6 +36,7 @@
     "site": { "tags": [] },
     "site-e2e": { "tags": [], "implicitDependencies": ["site"] },
     "react-hooks-lib": { "tags": [] },
-    "gql-base": { "tags": [] }
+    "gql-base": { "tags": [] },
+    "ui": { "tags": [] }
   }
 }

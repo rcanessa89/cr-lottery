@@ -76,10 +76,6 @@ export const getNames = (Entity) => {
   };
 };
 
-interface IUpdateInputFactory {
-  id: number;
-}
-
 // eslint-disable-next-line
 export const UpdateInputFactory = (Input, entityName: string): any => {
   const updateInputName = `Update${entityName}Input`;

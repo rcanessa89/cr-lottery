@@ -8,7 +8,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/utils/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/utils/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -27,7 +29,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/types/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/types/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -70,11 +74,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "chances:build" }
+          "options": {
+            "buildTarget": "chances:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/chances/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/chances/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -93,7 +101,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/chances-lib/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/chances-lib/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -112,7 +122,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/loteria-lib/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/loteria-lib/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -155,11 +167,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "loteria:build" }
+          "options": {
+            "buildTarget": "loteria:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/loteria/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/loteria/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -178,7 +194,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/lotto-lib/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/lotto-lib/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -221,11 +239,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "lotto:build" }
+          "options": {
+            "buildTarget": "lotto:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/lotto/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/lotto/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -244,7 +266,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/monazos-lib/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/monazos-lib/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -287,11 +311,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "monazos:build" }
+          "options": {
+            "buildTarget": "monazos:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/monazos/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/monazos/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -310,7 +338,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/tiempos-lib/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/tiempos-lib/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -353,11 +383,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "tiempos:build" }
+          "options": {
+            "buildTarget": "tiempos:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/tiempos/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/tiempos/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -421,11 +455,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "product-resource:build" }
+          "options": {
+            "buildTarget": "product-resource:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/product-resource/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/product-resource/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -444,7 +482,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/draw-lib/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/draw-lib/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -463,7 +503,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/models/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/models/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -506,11 +548,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "draw:build" }
+          "options": {
+            "buildTarget": "draw:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/draw/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/draw/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -530,12 +576,20 @@
         "build": {
           "executor": "@nrwl/next:build",
           "outputs": ["{options.outputPath}"],
-          "options": { "root": "apps/site", "outputPath": "dist/apps/site" },
-          "configurations": { "production": {} }
+          "options": {
+            "root": "apps/site",
+            "outputPath": "dist/apps/site"
+          },
+          "configurations": {
+            "production": {}
+          }
         },
         "serve": {
           "executor": "@nrwl/next:server",
-          "options": { "buildTarget": "site:build", "dev": true },
+          "options": {
+            "buildTarget": "site:build",
+            "dev": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "site:build:production",
@@ -545,11 +599,15 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": { "buildTarget": "site:build:production" }
+          "options": {
+            "buildTarget": "site:build:production"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/site/**/*.{ts,tsx,js,jsx}"] }
+          "options": {
+            "lintFilePatterns": ["apps/site/**/*.{ts,tsx,js,jsx}"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -574,12 +632,16 @@
             "devServerTarget": "site:serve"
           },
           "configurations": {
-            "production": { "devServerTarget": "site:serve:production" }
+            "production": {
+              "devServerTarget": "site:serve:production"
+            }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/site-e2e/**/*.{js,ts}"] }
+          "options": {
+            "lintFilePatterns": ["apps/site-e2e/**/*.{js,ts}"]
+          }
         }
       }
     },
@@ -611,7 +673,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/gql-base/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/gql-base/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -622,14 +686,43 @@
           }
         }
       }
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui"],
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
-  "cli": { "defaultCollection": "@nrwl/nest" },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
   "defaultProject": "chances",
   "generators": {
-    "@nrwl/react": { "application": { "babel": true } },
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
     "@nrwl/next": {
-      "application": { "style": "@emotion/styled", "linter": "eslint" }
+      "application": {
+        "linter": "eslint"
+      }
     }
   }
 }

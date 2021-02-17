@@ -4,6 +4,7 @@ import { Repository, Between } from 'typeorm';
 
 import { BaseEntityService } from '@cr-lottery/gql-base';
 import { Draw } from '@cr-lottery/models/draw/draw.entity';
+import { getDbDate } from '@cr-lottery/utils/get-db-date';
 import { CreateDrawInput } from '@cr-lottery/models/draw/create-draw.input';
 import { UpdateDrawInput } from '@cr-lottery/models/draw/update-draw-input';
 
@@ -20,7 +21,7 @@ export class DrawsService extends BaseEntityService<
     super(drawRepository);
   }
 
-  drawsMonth(month?: Date) {
+  public drawsMonth(month?: Date) {
     let date = null;
 
     if (month) {
@@ -29,16 +30,12 @@ export class DrawsService extends BaseEntityService<
       date = new Date();
     }
 
-    const firstDay = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      1
-    ).toISOString();
-    const lastDay = new Date(
-      date.getFullYear(),
-      date.getMonth() + 1,
-      0
-    ).toISOString();
+    const firstDay = getDbDate(
+      new Date(date.getFullYear(), date.getMonth(), 1)
+    );
+    const lastDay = getDbDate(
+      new Date(date.getFullYear(), date.getMonth() + 1, 0)
+    );
 
     return this.drawRepository.find({
       where: {

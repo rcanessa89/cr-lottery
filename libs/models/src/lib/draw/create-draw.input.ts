@@ -6,7 +6,7 @@ import {
   OmitType,
 } from '@nestjs/graphql';
 
-import { Product } from '@cr-lottery/types';
+import { ProductEnum } from '@cr-lottery/types';
 import { mapTypes } from '@cr-lottery/utils/map-types';
 import { CreateChancesResultInput } from '../chances/create-chances-result.input';
 import { CreateLoteriaResultInput } from '../loteria/create-loteria-result.input';
@@ -14,7 +14,7 @@ import { CreateLottoPrizeInput } from '../lotto/create-lotto-result.input';
 import { CreateMonazosResultInput } from '../monazos/create-monazos-result.input';
 import { CreateTiemposResultInput } from '../tiempos/create-tiempos-result.input';
 
-registerEnumType(Product, { name: 'Product' });
+registerEnumType(ProductEnum, { name: 'Product' });
 
 const drawResults = {
   CreateChancesResultInput,
@@ -45,8 +45,8 @@ export class CreateDrawInput {
   @Field()
   validity: Date;
 
-  @Field(() => Product)
-  product: Product;
+  @Field(() => ProductEnum)
+  product: ProductEnum;
 
   @Field(() => [inputMap.CreateLoteriaResultInput], { nullable: true })
   loteriaResults: Omit<CreateLoteriaResultInput, 'draw'>[];

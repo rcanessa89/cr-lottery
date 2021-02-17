@@ -1,7 +1,7 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { AfterLoad, Column, Entity, OneToMany, OneToOne } from 'typeorm';
 
-import { Product } from '@cr-lottery/types';
+import { ProductEnum } from '@cr-lottery/types';
 import { ResultsUnion } from './results.union';
 import { BaseGQLEntity } from '../utils/base-gql-entity';
 import { LoteriaResult } from '../loteria/loteria-result.entity';
@@ -10,7 +10,7 @@ import { LottoResult } from '../lotto/lotto-result.entity';
 import { MonazosResult } from '../monazos/monazos-result.entity';
 import { TiemposResult } from '../tiempos/tiempos-result.entity';
 
-registerEnumType(Product, { name: 'Product' });
+registerEnumType(ProductEnum, { name: 'Product' });
 
 @ObjectType()
 @Entity()
@@ -23,12 +23,12 @@ export class Draw extends BaseGQLEntity {
   @Column({ type: 'datetime' })
   validity: Date;
 
-  @Field(() => Product)
+  @Field(() => ProductEnum)
   @Column({
     type: 'enum',
-    enum: Product,
+    enum: ProductEnum,
   })
-  product: Product;
+  product: ProductEnum;
 
   @OneToMany(() => LoteriaResult, (loteriaResult) => loteriaResult.draw, {
     cascade: true,

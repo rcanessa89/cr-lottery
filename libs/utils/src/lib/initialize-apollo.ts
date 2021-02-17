@@ -21,28 +21,23 @@ const DRAW = getUri('draw');
 const drawLink = new HttpLink({ uri: DRAW });
 const chancesLink = ApolloLink.split(
   ({ getContext }) => getContext()?.clientType === Product.Chances,
-  new HttpLink({ uri: CHANCES }),
-  drawLink
+  new HttpLink({ uri: CHANCES })
 );
 const loteriaLink = ApolloLink.split(
   ({ getContext }) => getContext()?.clientType === Product.Loteria,
-  new HttpLink({ uri: LOTERIA }),
-  drawLink
+  new HttpLink({ uri: LOTERIA })
 );
 const lottoLink = ApolloLink.split(
   ({ getContext }) => getContext()?.clientType === Product.Lotto,
-  new HttpLink({ uri: LOTTO }),
-  drawLink
+  new HttpLink({ uri: LOTTO })
 );
 const monazosLink = ApolloLink.split(
-  ({ getContext }) => getContext()?.clientType === Product.Monazos,
-  new HttpLink({ uri: MONAZOS }),
-  drawLink
+  ({ getContext, ...x }) => getContext()?.clientType === Product.Monazos,
+  new HttpLink({ uri: MONAZOS })
 );
 const tiemposLink = ApolloLink.split(
   ({ getContext }) => getContext()?.clientType === Product.Tiempos,
-  new HttpLink({ uri: TIEMPOS }),
-  drawLink
+  new HttpLink({ uri: TIEMPOS })
 );
 
 const createApolloClient = () => {
@@ -56,6 +51,7 @@ const createApolloClient = () => {
       lottoLink,
       monazosLink,
       tiemposLink,
+      drawLink,
     ]),
     cache: new InMemoryCache(),
   });

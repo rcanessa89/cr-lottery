@@ -25,5 +25,6 @@ module.exports = {
     '<rootDir>/libs/react-hooks',
     '<rootDir>/libs/react-hooks-lib',
     '<rootDir>/libs/gql-base',
+    '<rootDir>/libs/ui',
   ],
 };

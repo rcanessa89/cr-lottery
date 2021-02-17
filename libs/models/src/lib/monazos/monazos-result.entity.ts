@@ -1,24 +1,24 @@
 import { ObjectType, Field, registerEnumType, Int } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
-import { DrawTime } from '@cr-lottery/types';
+import { DrawTimeEnum } from '@cr-lottery/types';
 import { Draw } from '../draw/draw.entity';
 import { BaseGQLEntity } from '../utils/base-gql-entity';
 
-registerEnumType(DrawTime, {
+registerEnumType(DrawTimeEnum, {
   name: 'DrawTime',
 });
 
 @ObjectType()
 @Entity()
 export class MonazosResult extends BaseGQLEntity {
-  @Field(() => DrawTime)
+  @Field(() => DrawTimeEnum)
   @Column({
     type: 'enum',
-    enum: DrawTime,
+    enum: DrawTimeEnum,
     nullable: false,
   })
-  time: DrawTime;
+  time: DrawTimeEnum;
 
   @Field(() => [Int])
   @Column('simple-array')

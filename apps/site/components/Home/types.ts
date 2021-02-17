@@ -1,11 +1,5 @@
-import { Product } from '@cr-lottery/types';
-
-export interface DrawsQueryResponse {
-  id: number;
-  date: string;
-  product: Product;
-}
+import { DrawMonth } from '@cr-lottery/react-hooks-lib';
 
 export interface HomeProps {
-  draws: DrawsQueryResponse[];
+  draws: DrawMonth[];
 }

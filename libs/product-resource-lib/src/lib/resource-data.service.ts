@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Connection, getConnection } from 'typeorm';
 
-import { Product, ObjectLiteral } from '@cr-lottery/types';
+import { ProductEnum, ObjectLiteral } from '@cr-lottery/types';
 
 @Injectable()
 export class ResourceDataService {
@@ -11,7 +11,7 @@ export class ResourceDataService {
     this.connection = getConnection();
   }
 
-  public async bulk(product: Product, values: ObjectLiteral[]) {
+  public async bulk(product: ProductEnum, values: ObjectLiteral[]) {
     const { relationTable } = this.getEntityMetadata(product);
     const drawTable = 'draw';
     const relationValues = this.getRelationValues(values);
@@ -75,33 +75,33 @@ export class ResourceDataService {
     return columns;
   }
 
-  private getEntityMetadata(product: Product) {
+  private getEntityMetadata(product: ProductEnum) {
     switch (product) {
-      case Product.Chances: {
+      case ProductEnum.CHANCES: {
         return {
           relationTable: 'chances_result',
         };
       }
 
-      case Product.Loteria: {
+      case ProductEnum.LOTERIA: {
         return {
           relationTable: 'loteria_result',
         };
       }
 
-      case Product.Lotto: {
+      case ProductEnum.LOTTO: {
         return {
           relationTable: 'lotto_result',
         };
       }
 
-      case Product.Monazos: {
+      case ProductEnum.MONAZOS: {
         return {
           relationTable: 'monazos_result',
         };
       }
 
-      case Product.Tiempos: {
+      case ProductEnum.TIEMPOS: {
         return {
           relationTable: 'tiempos_result',
         };

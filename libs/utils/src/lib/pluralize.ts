@@ -6,5 +6,9 @@ export const pluralize = (str: string) => {
     return strTrimed.substring(0, strTrimed.length - 1) + 'ies';
   }
 
+  if (lastLetter === 's') {
+    return strTrimed.substring(0, strTrimed.length - 1) + 'es';
+  }
+
   return strTrimed + 's';
 };

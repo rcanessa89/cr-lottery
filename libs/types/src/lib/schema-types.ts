@@ -138,6 +138,13 @@ export type CreateTiemposInput = {
   prize: Scalars['Float'];
 };
 
+export type CreateTiemposResultInput = {
+  time: DrawTime;
+  number: Scalars['Float'];
+  prize: Scalars['Float'];
+  draw: Scalars['Float'];
+};
+
 export type Draw = {
   __typename?: 'Draw';
   id: Scalars['ID'];
@@ -162,8 +169,8 @@ export type DrawOptionsWhere = {
 };
 
 export enum DrawTime {
-  Morning = 'Morning',
-  Afternoon = 'Afternoon',
+  Morning = 'MORNING',
+  Afternoon = 'AFTERNOON',
 }
 
 export type FindAllChancesResultOptions = {
@@ -206,6 +213,14 @@ export type FindAllMonazosResultOptions = {
   take?: Maybe<Scalars['Float']>;
 };
 
+export type FindAllTiemposResultOptions = {
+  where?: Maybe<TiemposResultOptionsWhere>;
+  relations?: Maybe<Array<Scalars['String']>>;
+  order?: Maybe<FindOrder>;
+  skip?: Maybe<Scalars['Float']>;
+  take?: Maybe<Scalars['Float']>;
+};
+
 export type FindOneChancesResultOptionsOptions = {
   where?: Maybe<ChancesResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
@@ -232,6 +247,12 @@ export type FindOneLottoPrizeOptionsOptions = {
 
 export type FindOneMonazosResultOptionsOptions = {
   where?: Maybe<MonazosResultOptionsWhere>;
+  relations?: Maybe<Array<Scalars['String']>>;
+  order?: Maybe<FindOrder>;
+};
+
+export type FindOneTiemposResultOptionsOptions = {
+  where?: Maybe<TiemposResultOptionsWhere>;
   relations?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<FindOrder>;
 };
@@ -360,6 +381,9 @@ export type Mutation = {
   createLoteriaResult: LoteriaResult;
   updateLoteriaResult: LoteriaResult;
   removeLoteriaResult: RemoveResult;
+  createTiemposResult: TiemposResult;
+  updateTiemposResult: TiemposResult;
+  removeTiemposResult: RemoveResult;
   createLottoResult: LottoResult;
   updateLottoResult: LottoResult;
   removeLottoResult: RemoveResult;
@@ -392,6 +416,18 @@ export type MutationUpdateLoteriaResultArgs = {
 };
 
 export type MutationRemoveLoteriaResultArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationCreateTiemposResultArgs = {
+  createTiemposResultInput: CreateTiemposResultInput;
+};
+
+export type MutationUpdateTiemposResultArgs = {
+  updateTiemposResultInput: UpdateTiemposResultInput;
+};
+
+export type MutationRemoveTiemposResultArgs = {
   id: Scalars['ID'];
 };
 
@@ -432,11 +468,11 @@ export type MutationRemoveDrawArgs = {
 };
 
 export enum Product {
-  Chances = 'Chances',
-  Loteria = 'Loteria',
-  Lotto = 'Lotto',
-  Monazos = 'Monazos',
-  Tiempos = 'Tiempos',
+  Chances = 'CHANCES',
+  Loteria = 'LOTERIA',
+  Lotto = 'LOTTO',
+  Monazos = 'MONAZOS',
+  Tiempos = 'TIEMPOS',
 }
 
 export type Query = {
@@ -447,6 +483,9 @@ export type Query = {
   loteriaResults: Array<LoteriaResult>;
   loteriaResult: LoteriaResult;
   countLoteriaResult: Scalars['Int'];
+  tiemposResults: Array<TiemposResult>;
+  tiemposResult: TiemposResult;
+  countTiemposResult: Scalars['Int'];
   lottoResults: Array<LottoResult>;
   lottoResult: LottoResult;
   countLottoResult: Scalars['Int'];
@@ -456,6 +495,7 @@ export type Query = {
   draws: Array<Draw>;
   draw: Draw;
   countDraw: Scalars['Int'];
+  drawsMonth: Array<Draw>;
 };
 
 export type QueryChancesResultsArgs = {
@@ -473,6 +513,15 @@ export type QueryLoteriaResultsArgs = {
 
 export type QueryLoteriaResultArgs = {
   FindOneOptions?: Maybe<FindOneLoteriaResultOptionsOptions>;
+  id: Scalars['Int'];
+};
+
+export type QueryTiemposResultsArgs = {
+  FindAllOptions?: Maybe<FindAllTiemposResultOptions>;
+};
+
+export type QueryTiemposResultArgs = {
+  FindOneOptions?: Maybe<FindOneTiemposResultOptionsOptions>;
   id: Scalars['Int'];
 };
 
@@ -503,6 +552,10 @@ export type QueryDrawArgs = {
   id: Scalars['Int'];
 };
 
+export type QueryDrawsMonthArgs = {
+  month?: Maybe<Scalars['DateTime']>;
+};
+
 export type RemoveResult = {
   __typename?: 'RemoveResult';
   affected?: Maybe<Scalars['Float']>;
@@ -518,6 +571,24 @@ export type Tiempos = {
   time: DrawTime;
   number: Scalars['Float'];
   prize: Scalars['Float'];
+};
+
+export type TiemposResult = {
+  __typename?: 'TiemposResult';
+  id: Scalars['ID'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  time: DrawTime;
+  number: Scalars['Float'];
+  prize: Scalars['Float'];
+  draw: Draw;
+};
+
+export type TiemposResultOptionsWhere = {
+  time?: Maybe<DrawTime>;
+  number?: Maybe<Scalars['Float']>;
+  prize?: Maybe<Scalars['Float']>;
+  draw?: Maybe<Scalars['Float']>;
 };
 
 export type UpdateChancesResultInput = {
@@ -565,6 +636,14 @@ export type UpdateLottoResultInput = {
 export type UpdateMonazosResultInput = {
   time?: Maybe<DrawTime>;
   numbers?: Maybe<Array<Scalars['Int']>>;
+  draw?: Maybe<Scalars['Float']>;
+  id: Scalars['ID'];
+};
+
+export type UpdateTiemposResultInput = {
+  time?: Maybe<DrawTime>;
+  number?: Maybe<Scalars['Float']>;
+  prize?: Maybe<Scalars['Float']>;
   draw?: Maybe<Scalars['Float']>;
   id: Scalars['ID'];
 };

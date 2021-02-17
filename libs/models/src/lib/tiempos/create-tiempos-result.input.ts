@@ -1,15 +1,15 @@
 import { InputType, Field, registerEnumType } from '@nestjs/graphql';
 
-import { DrawTime } from '@cr-lottery/types';
+import { DrawTimeEnum } from '@cr-lottery/types';
 
-registerEnumType(DrawTime, {
+registerEnumType(DrawTimeEnum, {
   name: 'DrawTime',
 });
 
 @InputType()
 export class CreateTiemposResultInput {
-  @Field(() => DrawTime)
-  time: DrawTime;
+  @Field(() => DrawTimeEnum)
+  time: DrawTimeEnum;
 
   @Field()
   number: number;
