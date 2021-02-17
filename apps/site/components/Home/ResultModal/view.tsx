@@ -11,6 +11,11 @@ const ResultModal: FunctionComponent<ResultModalProps> = ({
   onClose,
 }) => {
   const hook = getQueryHook(draw?.resource?.product);
+
+  if (!hook) {
+    return null;
+  }
+
   const [getData, { loading, data }] = hook();
   const isOpen = !!draw && !!data && !loading;
 

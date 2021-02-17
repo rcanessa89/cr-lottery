@@ -1,5 +1,4 @@
-import { gql, LazyQueryHookOptions } from '@apollo/client';
-import { useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery, LazyQueryHookOptions } from '@apollo/client';
 
 import {
   TiemposResult,

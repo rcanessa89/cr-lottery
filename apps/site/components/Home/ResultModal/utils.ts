@@ -21,8 +21,11 @@ export const getQueryHook = (product: Product) => {
     case Product.Lotto: {
       return useLottoLazyQuery;
     }
-    default: {
+    case Product.Loteria: {
       return useLoteriaLazyQuery;
+    }
+    default: {
+      return null;
     }
   }
 };
