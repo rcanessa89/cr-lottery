@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import { resultNumberFormat } from '@cr-lottery/utils/result-number-format';
+import { colonesFormat } from '@cr-lottery/utils/colones-format';
 import { ChancesContentProps } from './types';
 
 const ChancesContent: FunctionComponent<ChancesContentProps> = ({
@@ -36,7 +37,7 @@ const ChancesContent: FunctionComponent<ChancesContentProps> = ({
                 {resultNumberFormat(row.number)}
               </TableCell>
               <TableCell align="center">{row.series}</TableCell>
-              <TableCell align="center">{row.prize}</TableCell>
+              <TableCell align="center">{colonesFormat(row.prize)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
